@@ -1,0 +1,3 @@
+rootProject.name = "component-navigation"
+
+include ':samples:app-android'
