@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:background="@android:color/darker_gray"
+        android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/text_view_screen_a"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:textSize="32sp"
+        android:layout_width="wrap_content"
+        android:text="Screen Module A"
+        android:layout_height="wrap_content"/>
+
+    <EditText
+        android:id="@+id/edit_text_screen_a_argument_b"
+        android:layout_marginTop="48dp"
+        android:textColorHint="@android:color/darker_gray"
+        android:textColor="@android:color/black"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/text_view_screen_a"
+        android:layout_width="100dp"
+        android:singleLine="true"
+        android:hint="text"
+        android:gravity="center"
+        android:background="@android:color/white"
+        app:layout_constraintEnd_toStartOf="@+id/edit_text_screen_a_argument_c"
+        android:layout_height="wrap_content"/>
+
+    <Button
+        android:id="@+id/button_screen_a_navigate_to_b"
+        app:layout_constraintTop_toBottomOf="@id/edit_text_screen_a_argument_b"
+        app:layout_constraintStart_toStartOf="@+id/edit_text_screen_a_argument_b"
+        app:layout_constraintEnd_toEndOf="@+id/edit_text_screen_a_argument_b"
+        android:layout_marginTop="16dp"
+        android:background="@android:color/holo_purple"
+        android:gravity="center"
+        android:text="Screen B"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"/>
+
+    <EditText
+        android:id="@+id/edit_text_screen_a_argument_c"
+        android:layout_marginTop="48dp"
+        android:textColorHint="@android:color/darker_gray"
+        android:textColor="@android:color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/edit_text_screen_a_argument_b"
+        app:layout_constraintTop_toBottomOf="@id/text_view_screen_a"
+        android:layout_width="100dp"
+        android:hint="text"
+        android:gravity="center"
+        android:singleLine="true"
+        android:background="@android:color/white"
+        android:layout_height="wrap_content"/>
+
+
+    <Button
+        android:id="@+id/button_screen_a_navigate_to_c"
+        app:layout_constraintTop_toBottomOf="@id/edit_text_screen_a_argument_c"
+        app:layout_constraintStart_toStartOf="@+id/edit_text_screen_a_argument_c"
+        app:layout_constraintEnd_toEndOf="@+id/edit_text_screen_a_argument_c"
+        android:layout_marginTop="16dp"
+        android:background="@android:color/holo_purple"
+        android:gravity="center"
+        android:text="Screen C"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
