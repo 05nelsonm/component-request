@@ -4,9 +4,9 @@ import io.matthewnelson.components.dependencies.Versions
 
 plugins {
     id("com.android.application")
-    id("dagger.hilt.android.plugin")
     id("kotlin-android")
     id("kotlin-kapt")
+    id("dagger.hilt.android.plugin")
     id("dependencies")
 }
 
