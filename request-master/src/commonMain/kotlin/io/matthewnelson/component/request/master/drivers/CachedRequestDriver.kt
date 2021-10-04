@@ -25,7 +25,7 @@ import kotlinx.coroutines.sync.withLock
  *
  * [replayCacheSize] must be > 0
  * */
-class CachedRequestDriver<T: Any>(
+open class CachedRequestDriver<T: Any>(
     // For android, 3 is a good value. This really depends on if you have navigation being
     // executed automatically w/o user input (say, after animation completes). This is due
     // to configuration changes which make tracking what requests have been executed a necessity.

@@ -11,7 +11,7 @@ import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
 
 // TODO: Rework
-internal class BufferedRequestDriver<T: Any>(
+internal open class BufferedRequestDriver<T: Any>(
     private val whenTrueExecuteRequest: (suspend (instance: T, request: Request<T>) -> Boolean)? = null
 ): RequestDriver<T>() {
 
