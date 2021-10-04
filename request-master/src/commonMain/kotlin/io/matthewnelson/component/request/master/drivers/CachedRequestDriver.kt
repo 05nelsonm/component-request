@@ -3,9 +3,11 @@ package io.matthewnelson.component.request.master.drivers
 import io.matthewnelson.component.request.master.util.RequestHolder
 import io.matthewnelson.component.request.master.util.RequestId
 import io.matthewnelson.component.request.slave.Request
+import kotlinx.coroutines.currentCoroutineContext
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.isActive
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
 
@@ -23,7 +25,7 @@ import kotlinx.coroutines.sync.withLock
  *
  * [replayCacheSize] must be > 0
  * */
-class CachedRequestDriver<T: Any>(
+open class CachedRequestDriver<T: Any>(
     // For android, 3 is a good value. This really depends on if you have navigation being
     // executed automatically w/o user input (say, after animation completes). This is due
     // to configuration changes which make tracking what requests have been executed a necessity.
@@ -38,7 +40,7 @@ class CachedRequestDriver<T: Any>(
     }
 
     private val executedRequestsLock = Mutex()
-    private val executedRequests: Array<RequestId?> = arrayOfNulls(replayCacheSize)
+    private val executedRequests: MutableList<RequestId> = ArrayList(replayCacheSize)
 
     /**
      * Returns true if the request was executed, and false if it was not
@@ -54,14 +56,18 @@ class CachedRequestDriver<T: Any>(
                 return false
             }
 
-            for (i in 0 until executedRequests.lastIndex) {
-                executedRequests[i] = executedRequests[i + 1]
+            return if (currentCoroutineContext().isActive) {
+                if (executedRequests.size == replayCacheSize) {
+                    executedRequests.removeFirst()
+                }
+                executedRequests.add(holder.getId())
+
+                holder.request.execute(instance)
+
+                true
+            } else {
+                false
             }
-            executedRequests[executedRequests.lastIndex] = holder.getId()
-
-            holder.request.execute(instance)
-
-            return true
         }
     }
 
