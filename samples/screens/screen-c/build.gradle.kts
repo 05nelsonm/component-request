@@ -87,7 +87,7 @@ kmpConfiguration {
 
         commonMainSourceSet = {
             dependencies {
-                api(project(":request-slave"))
+                api(project(":request-concept"))
             }
         },
         commonTestSourceSet = null

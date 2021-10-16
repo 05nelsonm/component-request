@@ -86,7 +86,7 @@ kmpConfiguration {
 
         commonMainSourceSet = {
             dependencies {
-                api(project(":request-master"))
+                api(project(":request-feature"))
                 api(project(":samples:screens:screen-a"))
                 api(project(":samples:screens:screen-b"))
                 api(project(":samples:screens:screen-c"))

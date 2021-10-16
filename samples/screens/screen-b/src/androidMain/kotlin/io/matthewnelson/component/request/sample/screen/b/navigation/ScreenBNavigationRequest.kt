@@ -2,7 +2,7 @@ package io.matthewnelson.component.request.sample.screen.b.navigation
 
 import androidx.navigation.NavController
 import io.matthewnelson.component.request.androidx.navigation.DefaultNavAnims
-import io.matthewnelson.component.request.slave.Request
+import io.matthewnelson.component.request.concept.Request
 import io.matthewnelson.component.request.sample.screen.b.R
 import io.matthewnelson.component.request.sample.screen.b.ui.ScreenBArgs
 

@@ -17,7 +17,7 @@ package io.matthewnelson.component.request.androidx.navigation
 
 import androidx.annotation.IdRes
 import androidx.navigation.NavController
-import io.matthewnelson.component.request.slave.Request
+import io.matthewnelson.component.request.concept.Request
 
 open class PopBackStack(
     @IdRes
