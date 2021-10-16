@@ -1,11 +1,3 @@
-pluginManagement {
-    repositories {
-        mavenCentral()
-        google()
-        gradlePluginPortal()
-    }
-}
-
 rootProject.name = "component-request"
 
 includeBuild("kotlin-components/includeBuild/dependencies")

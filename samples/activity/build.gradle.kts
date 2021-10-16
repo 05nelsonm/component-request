@@ -1,7 +1,7 @@
-import io.matthewnelson.components.dependencies.Deps
-import io.matthewnelson.components.dependencies.KaptDeps
-import io.matthewnelson.components.dependencies.Versions
-import io.matthewnelson.components.kmp.KmpTarget
+import io.matthewnelson.kotlin.components.dependencies.deps
+import io.matthewnelson.kotlin.components.dependencies.depsKapt
+import io.matthewnelson.kotlin.components.dependencies.versions
+import io.matthewnelson.kotlin.components.kmp.KmpTarget
 import org.gradle.api.internal.artifacts.dependencies.DefaultExternalModuleDependency
 
 plugins {
@@ -16,27 +16,26 @@ kmpConfiguration {
 //            KmpTarget.JVM.JVM.DEFAULT,
 
             KmpTarget.JVM.ANDROID(
-                buildTools = Versions.buildTools,
-                compileSdk = Versions.compileSdk,
-                minSdk = Versions.minSdk16,
-                targetSdk = Versions.compileSdk,
+                buildTools = versions.buildTools,
+                compileSdk = versions.sdkCompile,
+                minSdk = versions.sdkMin16,
                 pluginIds = setOf("kotlin-kapt", "dagger.hilt.android.plugin"),
                 androidConfig = {
                     buildFeatures.viewBinding = true
                 },
                 mainSourceSet = {
                     dependencies handler@ {
-                        api(Deps.androidx.appCompat)
-                        implementation(Deps.androidx.constraintLayout)
-                        implementation(Deps.viewBindingDelegateNoReflect)
-                        implementation(Deps.google.hilt)
+                        api(deps.androidx.appCompat)
+                        implementation(deps.androidx.constraintLayout)
+                        implementation(deps.viewBindingDelegateNoReflect)
+                        implementation(deps.google.hilt)
 
-                        implementation(KaptDeps.google.hilt.hilt)
-                        configurations.getByName(KaptDeps.kapt).dependencies.add(
+                        implementation(depsKapt.google.hilt.hilt)
+                        configurations[depsKapt.kapt].dependencies.add(
                             DefaultExternalModuleDependency(
-                                KaptDeps.google.hilt.group,
-                                KaptDeps.google.hilt.name,
-                                KaptDeps.google.hilt.version,
+                                depsKapt.google.hilt.group,
+                                depsKapt.google.hilt.name,
+                                depsKapt.google.hilt.version,
                             )
                         )
                     }

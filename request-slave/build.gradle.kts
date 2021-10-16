@@ -1,5 +1,5 @@
-import io.matthewnelson.components.dependencies.Versions
-import io.matthewnelson.components.kmp.KmpTarget
+import io.matthewnelson.kotlin.components.dependencies.versions
+import io.matthewnelson.kotlin.components.kmp.KmpTarget
 import org.jetbrains.kotlin.gradle.plugin.KotlinJsCompilerType
 
 plugins {
@@ -14,10 +14,9 @@ kmpConfiguration {
             KmpTarget.JVM.JVM.DEFAULT,
 
             KmpTarget.JVM.ANDROID(
-                buildTools = Versions.buildTools,
-                compileSdk = Versions.compileSdk,
-                minSdk = Versions.minSdk16,
-                targetSdk = Versions.compileSdk,
+                buildTools = versions.buildTools,
+                compileSdk = versions.sdkCompile,
+                minSdk = versions.sdkMin16,
             ),
 
             KmpTarget.NON_JVM.JS(
