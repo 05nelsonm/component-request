@@ -3,7 +3,6 @@ import org.gradle.api.tasks.testing.logging.TestLogEvent.FAILED
 import org.gradle.api.tasks.testing.logging.TestLogEvent.PASSED
 import org.gradle.api.tasks.testing.logging.TestLogEvent.SKIPPED
 import org.gradle.api.tasks.testing.logging.TestLogEvent.STARTED
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 buildscript {
@@ -15,23 +14,15 @@ buildscript {
     }
 
     dependencies {
-        // System properties for plugin versions are set in buildSrc
-        // in order to pass the "dependencies" plugins' values as
-        // we cannot access them here until after the buildscript runs
-
-        // Can't use latest AGP with Intellij IDEA yet
-        // See: https://youtrack.jetbrains.com/issue/IDEA-264255
-//        classpath("com.android.tools.build:gradle:4.2.0")
-        classpath(System.getProperty("GRADLE_ANDROID"))
-
-        classpath(System.getProperty("GRADLE_ANDROIDX_NAVIGATION_SAFEARGS"))
-        classpath(System.getProperty("GRADLE_GOOGLE_HILT"))
-        classpath(System.getProperty("GRADLE_KOTLIN"))
-        classpath(System.getProperty("GRADLE_INTELLIJ"))
-        classpath(System.getProperty("GRADLE_MAVEN_PUBLISH"))
+        classpath(io.matthewnelson.kotlin.components.dependencies.plugins.android.gradle)
+        classpath(io.matthewnelson.kotlin.components.dependencies.plugins.androidx.navigation.safeArgs)
+        classpath(io.matthewnelson.kotlin.components.dependencies.plugins.google.hilt)
+        classpath(io.matthewnelson.kotlin.components.dependencies.plugins.kotlin.gradle)
+        classpath(io.matthewnelson.kotlin.components.dependencies.plugins.intellijGradle)
+        classpath(io.matthewnelson.kotlin.components.dependencies.plugins.mavenPublish)
 
         // NOTE: Do not place your application dependencies here; they belong
-        // in the individual module build.gradle files
+        // in the individual module build.gradle.kts files
     }
 }
 
@@ -69,12 +60,6 @@ subprojects {
             exceptionFormat = TestExceptionFormat.FULL
             events(STARTED, PASSED, SKIPPED, FAILED)
             showStandardStreams = true
-        }
-    }
-
-    tasks.withType<KotlinCompile>().all {
-        kotlinOptions {
-            jvmTarget = "1.8"
         }
     }
 }

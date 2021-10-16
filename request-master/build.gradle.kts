@@ -1,7 +1,7 @@
-import io.matthewnelson.components.dependencies.Deps
-import io.matthewnelson.components.dependencies.TestDeps
-import io.matthewnelson.components.dependencies.Versions
-import io.matthewnelson.components.kmp.KmpTarget
+import io.matthewnelson.kotlin.components.dependencies.deps
+import io.matthewnelson.kotlin.components.dependencies.depsTest
+import io.matthewnelson.kotlin.components.dependencies.versions
+import io.matthewnelson.kotlin.components.kmp.KmpTarget
 import org.jetbrains.kotlin.gradle.plugin.KotlinJsCompilerType
 
 plugins {
@@ -16,21 +16,20 @@ kmpConfiguration {
             KmpTarget.JVM.JVM(
                 testSourceSet = {
                     dependencies {
-                        implementation(TestDeps.kotlin.coroutines)
+                        implementation(depsTest.kotlin.coroutines)
                         implementation(kotlin("test-junit"))
                     }
                 }
             ),
 
             KmpTarget.JVM.ANDROID(
-                buildTools = Versions.buildTools,
-                compileSdk = Versions.compileSdk,
-                minSdk = Versions.minSdk16,
-                targetSdk = Versions.compileSdk,
+                buildTools = versions.buildTools,
+                compileSdk = versions.sdkCompile,
+                minSdk = versions.sdkMin16,
                 mainSourceSet = {
                     dependencies {
-                        implementation(Deps.androidx.lifecycle.commonJava8)
-                        implementation(Deps.androidx.lifecycle.runtime)
+                        implementation(deps.androidx.lifecycle.commonJava8)
+                        implementation(deps.androidx.lifecycle.runtime)
                     }
                 }
             ),
@@ -83,7 +82,7 @@ kmpConfiguration {
         commonMainSourceSet = {
             dependencies {
                 api(project(":request-slave"))
-                implementation(Deps.kotlin.coroutines.core)
+                implementation(deps.kotlin.coroutines.core)
             }
         },
         commonTestSourceSet = {

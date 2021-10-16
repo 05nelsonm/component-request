@@ -1,6 +1,6 @@
-import io.matthewnelson.components.dependencies.Deps
-import io.matthewnelson.components.dependencies.KaptDeps
-import io.matthewnelson.components.dependencies.Versions
+import io.matthewnelson.kotlin.components.dependencies.deps
+import io.matthewnelson.kotlin.components.dependencies.depsKapt
+import io.matthewnelson.kotlin.components.dependencies.versions
 
 plugins {
     id("com.android.application")
@@ -11,21 +11,21 @@ plugins {
 }
 
 android {
-    compileSdkVersion(Versions.compileSdk)
-    buildToolsVersion(Versions.buildTools)
+    compileSdk = versions.sdkCompile
+    buildToolsVersion = versions.buildTools
 
     packagingOptions {
-        exclude("META-INF/gradle/incremental.annotation.processors")
+        resources.excludes.add("META-INF/gradle/incremental.annotation.processors")
     }
 
     defaultConfig {
-        applicationId("io.matthewnelson.sampleandroid")
-        minSdkVersion(Versions.minSdk23)
-        targetSdkVersion(Versions.compileSdk)
-        versionCode(1)
-        versionName("1.0.0")
+        applicationId = "io.matthewnelson.sampleandroid"
+        minSdk = versions.sdkMin23
+        targetSdk = versions.sdkTarget
+        versionCode = 1
+        versionName = "1.0.0"
 
-        testInstrumentationRunner("androidx.test.runner.AndroidJUnitRunner")
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         testInstrumentationRunnerArguments["disableAnalytics"] = "true"
     }
 
@@ -40,24 +40,24 @@ android {
 
     buildTypes {
         getByName("release") {
-            minifyEnabled(false)
+            isMinifyEnabled = false
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
     }
 
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
     }
 
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = JavaVersion.VERSION_11.toString()
     }
 }
 
 dependencies {
     implementation(project(":samples:activity"))
 
-    implementation(Deps.google.hilt)
-    kapt(KaptDeps.google.hilt.hilt)
+    implementation(deps.google.hilt)
+    kapt(depsKapt.google.hilt.hilt)
 }
