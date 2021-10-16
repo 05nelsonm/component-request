@@ -59,5 +59,5 @@ dependencies {
     implementation(project(":samples:activity"))
 
     implementation(deps.google.hilt)
-    kapt(depsKapt.google.hilt.hilt)
+    kapt(depsKapt.google.hilt)
 }
