@@ -2,7 +2,7 @@ import io.matthewnelson.kotlin.components.dependencies.deps
 import io.matthewnelson.kotlin.components.dependencies.depsKapt
 import io.matthewnelson.kotlin.components.dependencies.versions
 import io.matthewnelson.kotlin.components.kmp.KmpTarget
-import org.gradle.api.internal.artifacts.dependencies.DefaultExternalModuleDependency
+import io.matthewnelson.kotlin.components.kmp.kapt
 
 plugins {
     id("kmp-configuration")
@@ -29,15 +29,7 @@ kmpConfiguration {
                         implementation(deps.androidx.constraintLayout)
                         implementation(deps.viewBindingDelegateNoReflect)
                         implementation(deps.google.hilt)
-
-                        implementation(depsKapt.google.hilt.hilt)
-                        configurations[depsKapt.kapt].dependencies.add(
-                            DefaultExternalModuleDependency(
-                                depsKapt.google.hilt.group,
-                                depsKapt.google.hilt.name,
-                                depsKapt.google.hilt.version,
-                            )
-                        )
+                        kapt(project, depsKapt.google.hilt)
                     }
                 }
             ),
