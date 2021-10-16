@@ -3,8 +3,8 @@ rootProject.name = "component-request"
 includeBuild("kotlin-components/includeBuild/dependencies")
 includeBuild("kotlin-components/includeBuild/kmp")
 
-include(":request-master")
-include(":request-slave")
+include(":request-feature")
+include(":request-concept")
 
 @Suppress("PrivatePropertyName")
 private val KMP_TARGETS: String? by settings

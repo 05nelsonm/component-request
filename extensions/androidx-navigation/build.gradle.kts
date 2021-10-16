@@ -20,7 +20,7 @@ kmpConfiguration {
                 minSdk = versions.sdkMin16,
                 mainSourceSet = {
                     dependencies {
-                        api(project(":request-slave"))
+                        api(project(":request-concept"))
                         implementation(deps.androidx.navigation.fragment)
                     }
                 }

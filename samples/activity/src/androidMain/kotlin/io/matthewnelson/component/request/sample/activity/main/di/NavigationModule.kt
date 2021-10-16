@@ -6,14 +6,14 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ActivityRetainedComponent
 import dagger.hilt.android.scopes.ActivityRetainedScoped
-import io.matthewnelson.component.request.master.drivers.CachedRequestDriver
-import io.matthewnelson.component.request.master.drivers.RequestDriver
+import io.matthewnelson.component.request.feature.drivers.CachedRequestDriver
+import io.matthewnelson.component.request.feature.drivers.RequestDriver
 import io.matthewnelson.component.request.sample.screen.a.navigation.ScreenANavigator
 import io.matthewnelson.component.request.sample.screen.a.navigation.ScreenBText
 import io.matthewnelson.component.request.sample.screen.a.navigation.ScreenCText
 import io.matthewnelson.component.request.sample.screen.b.navigation.ScreenBNavigationRequest
 import io.matthewnelson.component.request.sample.screen.c.navigation.ScreenCNavigationRequest
-import io.matthewnelson.component.request.slave.BaseRequestDriver
+import io.matthewnelson.component.request.concept.BaseRequestDriver
 
 @Module
 @InstallIn(ActivityRetainedComponent::class)
