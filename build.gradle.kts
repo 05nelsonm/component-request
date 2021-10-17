@@ -18,6 +18,7 @@ buildscript {
         classpath(io.matthewnelson.kotlin.components.dependencies.plugins.androidx.navigation.safeArgs)
         classpath(io.matthewnelson.kotlin.components.dependencies.plugins.google.hilt)
         classpath(io.matthewnelson.kotlin.components.dependencies.plugins.kotlin.gradle)
+        classpath(io.matthewnelson.kotlin.components.dependencies.plugins.kotlin.dokka)
         classpath(io.matthewnelson.kotlin.components.dependencies.plugins.intellijGradle)
         classpath(io.matthewnelson.kotlin.components.dependencies.plugins.mavenPublish)
 
@@ -41,4 +42,17 @@ allprojects {
             showStandardStreams = true
         }
     }
+
+}
+
+plugins {
+    id("kmp-publish")
+}
+
+kmpPublish {
+    setupRootProject(
+        versionName = "1.0.0-SNAPSHOT",
+        versionCode = 100000,
+        pomInceptionYear = 2021,
+    )
 }
