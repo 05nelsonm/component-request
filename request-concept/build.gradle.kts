@@ -11,54 +11,37 @@ kmpConfiguration {
     setupMultiplatform(
         setOf(
 
-            KmpTarget.JVM.JVM.DEFAULT,
+            KmpTarget.Jvm.Jvm.DEFAULT,
 
-            KmpTarget.JVM.ANDROID(
+            KmpTarget.Jvm.Android(
                 buildTools = versions.buildTools,
                 compileSdk = versions.sdkCompile,
                 minSdk = versions.sdkMin16,
             ),
 
-            KmpTarget.NON_JVM.JS(
+            KmpTarget.NonJvm.JS(
                 compilerType = KotlinJsCompilerType.BOTH,
-                browser = KmpTarget.NON_JVM.JS.Browser(
+                browser = KmpTarget.NonJvm.JS.Browser(
                     jsBrowserDsl = null
                 ),
-                node = KmpTarget.NON_JVM.JS.Node(
+                node = KmpTarget.NonJvm.JS.Node(
                     jsNodeDsl = null
                 ),
                 mainSourceSet = null,
-                testSourceSet =  null,
+                testSourceSet = null,
             ),
 
-            KmpTarget.NON_JVM.NATIVE.UNIX.DARWIN.IOS.ALL.DEFAULT,
-//            KmpTarget.NON_JVM.NATIVE.UNIX.DARWIN.IOS.ARM32.DEFAULT,
-//            KmpTarget.NON_JVM.NATIVE.UNIX.DARWIN.IOS.ARM64.DEFAULT,
-//            KmpTarget.NON_JVM.NATIVE.UNIX.DARWIN.IOS.X64.DEFAULT,
-//            KmpTarget.NON_JVM.NATIVE.UNIX.DARWIN.IOS.SIMULATOR_ARM64.DEFAULT,
-
-            KmpTarget.NON_JVM.NATIVE.UNIX.DARWIN.MACOS.X64.DEFAULT,
-            KmpTarget.NON_JVM.NATIVE.UNIX.DARWIN.MACOS.ARM64.DEFAULT,
-
-            KmpTarget.NON_JVM.NATIVE.UNIX.DARWIN.TVOS.ALL.DEFAULT,
-//            KmpTarget.NON_JVM.NATIVE.UNIX.DARWIN.TVOS.ARM64.DEFAULT,
-//            KmpTarget.NON_JVM.NATIVE.UNIX.DARWIN.TVOS.X64.DEFAULT,
-//            KmpTarget.NON_JVM.NATIVE.UNIX.DARWIN.TVOS.SIMULATOR_ARM64.DEFAULT,
-
-            KmpTarget.NON_JVM.NATIVE.UNIX.DARWIN.WATCHOS.ALL.DEFAULT,
-//            KmpTarget.NON_JVM.NATIVE.UNIX.DARWIN.WATCHOS.ARM32.DEFAULT,
-//            KmpTarget.NON_JVM.NATIVE.UNIX.DARWIN.WATCHOS.ARM64.DEFAULT,
-//            KmpTarget.NON_JVM.NATIVE.UNIX.DARWIN.WATCHOS.X64.DEFAULT,
-//            KmpTarget.NON_JVM.NATIVE.UNIX.DARWIN.WATCHOS.X86.DEFAULT,
-//            KmpTarget.NON_JVM.NATIVE.UNIX.DARWIN.WATCHOS.SIMULATOR_ARM64.DEFAULT,
-
-//            KmpTarget.NON_JVM.NATIVE.UNIX.LINUX.ARM32HFP.DEFAULT,
-//            KmpTarget.NON_JVM.NATIVE.UNIX.LINUX.MIPS32.DEFAULT,
-//            KmpTarget.NON_JVM.NATIVE.UNIX.LINUX.MIPSEL32.DEFAULT,
-            KmpTarget.NON_JVM.NATIVE.UNIX.LINUX.X64.DEFAULT,
-
-            KmpTarget.NON_JVM.NATIVE.MINGW.X64.DEFAULT,
-//            KmpTarget.NON_JVM.NATIVE.MINGW.X86.DEFAULT,
+            KmpTarget.NonJvm.Native.Unix.Darwin.Ios.All(enableSimulator = {}),
+            KmpTarget.NonJvm.Native.Unix.Darwin.Macos.X64.DEFAULT,
+            KmpTarget.NonJvm.Native.Unix.Darwin.Macos.Arm64.DEFAULT,
+            KmpTarget.NonJvm.Native.Unix.Darwin.Tvos.All(enableSimulator = {}),
+            KmpTarget.NonJvm.Native.Unix.Darwin.Watchos.All(enableSimulator = {}),
+            KmpTarget.NonJvm.Native.Unix.Linux.Arm32Hfp.DEFAULT,
+            KmpTarget.NonJvm.Native.Unix.Linux.Mips32.DEFAULT,
+            KmpTarget.NonJvm.Native.Unix.Linux.Mipsel32.DEFAULT,
+            KmpTarget.NonJvm.Native.Unix.Linux.X64.DEFAULT,
+            KmpTarget.NonJvm.Native.Mingw.X64.DEFAULT,
+            KmpTarget.NonJvm.Native.Mingw.X86.DEFAULT,
         ),
         commonMainSourceSet = null,
         commonTestSourceSet = {
