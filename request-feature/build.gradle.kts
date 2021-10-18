@@ -27,6 +27,9 @@ kmpConfiguration {
                 buildTools = versions.buildTools,
                 compileSdk = versions.sdkCompile,
                 minSdk = versions.sdkMin16,
+                target = {
+                    publishLibraryVariants("release")
+                },
                 mainSourceSet = {
                     dependencies {
                         implementation(deps.androidx.lifecycle.commonJava8)

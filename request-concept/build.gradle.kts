@@ -18,6 +18,9 @@ kmpConfiguration {
                 buildTools = versions.buildTools,
                 compileSdk = versions.sdkCompile,
                 minSdk = versions.sdkMin16,
+                target = {
+                    publishLibraryVariants("release")
+                }
             ),
 
             KmpTarget.NonJvm.JS(
