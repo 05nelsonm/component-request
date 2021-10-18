@@ -28,7 +28,7 @@ kmpConfiguration {
 
 kmpPublish {
     setupModule(
-        pomArtifactId = "request-extension-androidx-navigations",
+        pomArtifactId = "request-extension-androidx-navigation",
         pomDescription = "Kotlin Components' Request Concept extension for androidx navigation"
     )
 }
