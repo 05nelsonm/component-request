@@ -29,6 +29,7 @@ import org.junit.Before
 import org.junit.Test
 import kotlin.test.assertEquals
 
+@OptIn(ExperimentalCoroutinesApi::class)
 @Suppress("EXPERIMENTAL_API_USAGE")
 class CachedRequestDriverUnitTest {
 
@@ -103,20 +104,26 @@ class CachedRequestDriverUnitTest {
 
             val whenTrueExecuteSuspend = MutableStateFlow(false)
 
-            val localDriver = CachedRequestDriver<Any>(replayCacheSize = 5,) { _, _ ->
-                try {
-                    // suspend until cancelled or StateFlow changes to true to continue
-                    whenTrueExecuteSuspend.collect {
-                        if (it) {
-                            throw Exception()
+            val localDriver = object : CachedRequestDriver<Any>(replayCacheSize = 5) {
+
+                override suspend fun whenTrueExecuteRequest(
+                    instance: Any,
+                    request: Request<Any>
+                ): Boolean {
+                    try {
+                        // suspend until cancelled or StateFlow changes to true to continue
+                        whenTrueExecuteSuspend.collect {
+                            if (it) {
+                                throw Exception()
+                            }
                         }
-                    }
-                } catch (_: Exception) {}
+                    } catch (_: Exception) {}
 
-                whenTrueExecuteSuspend.value = false
+                    whenTrueExecuteSuspend.value = false
 
-                // return true to execute request
-                true
+                    // return true to execute request
+                    return true
+                }
             }
 
             var executions = 0

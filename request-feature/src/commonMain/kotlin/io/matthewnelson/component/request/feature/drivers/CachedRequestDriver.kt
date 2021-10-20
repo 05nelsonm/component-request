@@ -1,7 +1,22 @@
+/*
+*  Copyright 2021 Matthew Nelson
+*
+*  Licensed under the Apache License, Version 2.0 (the "License");
+*  you may not use this file except in compliance with the License.
+*  You may obtain a copy of the License at
+*
+*      http://www.apache.org/licenses/LICENSE-2.0
+*
+*  Unless required by applicable law or agreed to in writing, software
+*  distributed under the License is distributed on an "AS IS" BASIS,
+*  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+*  See the License for the specific language governing permissions and
+*  limitations under the License.
+* */
 package io.matthewnelson.component.request.feature.drivers
 
 import io.matthewnelson.component.request.feature.util.RequestHolder
-import io.matthewnelson.component.request.feature.util.RequestId
+import io.matthewnelson.component.request.feature.util.RandomId
 import io.matthewnelson.component.request.concept.Request
 import kotlinx.coroutines.currentCoroutineContext
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -13,7 +28,7 @@ import kotlinx.coroutines.sync.withLock
 
 /**
  * Caches submitted requests such that upon collection, all requests (up to the [replayCacheSize]
- * specified) are replayed. Already executed requests are tracked by their [RequestId], such that
+ * specified) are replayed. Already executed requests are tracked by their [RandomId], such that
  * [CachedRequestDriver.executeRequest] will return `false` if it has already been executed; this is
  * necessary for platforms such as Android, where configuration changes could interrupt submission
  * and/or collection.
@@ -29,8 +44,7 @@ open class CachedRequestDriver<T: Any>(
     // For android, 3 is a good value. This really depends on if you have navigation being
     // executed automatically w/o user input (say, after animation completes). This is due
     // to configuration changes which make tracking what requests have been executed a necessity.
-    val replayCacheSize: Int,
-    private val whenTrueExecuteRequest: (suspend (instance: T, request: Request<T>) -> Boolean)? = null
+    val replayCacheSize: Int
 ): RequestDriver<T>() {
 
     init {
@@ -40,19 +54,21 @@ open class CachedRequestDriver<T: Any>(
     }
 
     private val executedRequestsLock = Mutex()
-    private val executedRequests: MutableList<RequestId> = ArrayList(replayCacheSize)
+    private val executedRequests: MutableList<RandomId> = ArrayList(replayCacheSize)
+
+    open suspend fun whenTrueExecuteRequest(instance: T, request: Request<T>): Boolean { return true }
 
     /**
      * Returns true if the request was executed, and false if it was not
      * */
     override suspend fun executeRequest(instance: T, holder: RequestHolder<T>): Boolean {
         executedRequestsLock.withLock {
-            if (executedRequests.contains(holder.getId())) {
+            if (executedRequests.contains(holder.id)) {
                 return false
             }
 
 
-            if (whenTrueExecuteRequest?.invoke(instance, holder.request) == false) {
+            if (!whenTrueExecuteRequest(instance, holder.request)) {
                 return false
             }
 
@@ -60,7 +76,7 @@ open class CachedRequestDriver<T: Any>(
                 if (executedRequests.size == replayCacheSize) {
                     executedRequests.removeFirst()
                 }
-                executedRequests.add(holder.getId())
+                executedRequests.add(holder.id)
 
                 holder.request.execute(instance)
 
@@ -71,21 +87,20 @@ open class CachedRequestDriver<T: Any>(
         }
     }
 
-
     @Suppress("RemoveExplicitTypeArguments")
-    private val _requestSharedFlow: MutableSharedFlow<RequestHolder<T>> by lazy {
+    private val requestSharedFlow: MutableSharedFlow<RequestHolder<T>> by lazy {
         MutableSharedFlow<RequestHolder<T>>(replayCacheSize)
     }
 
     override suspend fun collect(action: suspend (value: RequestHolder<T>) -> Unit) {
-        _requestSharedFlow.asSharedFlow().collect { action.invoke(it) }
+        requestSharedFlow.asSharedFlow().collect { action.invoke(it) }
     }
 
     /**
-     * Assigns a [RequestId] to the navigation request such that execution of it
+     * Assigns a [RandomId] to the navigation request such that execution of it
      * can be tracked.
      * */
     override suspend fun submitRequest(request: Request<T>) {
-        _requestSharedFlow.emit(RequestHolder(request))
+        requestSharedFlow.emit(RequestHolder(request))
     }
 }
