@@ -21,22 +21,16 @@ import io.matthewnelson.component.request.concept.Request
 
 open class PopBackStack(
     @IdRes
-    private val destinationId: Int? = null,
-
-    private val inclusive: Boolean = false,
-//    private val onNavigationFailure: (() -> Unit)? = null,
+    val destinationId: Int? = null,
+    val inclusive: Boolean = false,
 ): Request<NavController>() {
+
     override fun execute(value: NavController) {
-        destinationId?.let { destination ->
-            value.popBackStack(destination, inclusive)
-//            if (!controller.popBackStack(destination, inclusive)) {
-//                onNavigationFailure?.invoke()
-//            }
-        } ?: value.previousBackStackEntry?.let {
+        if (destinationId != null) {
+            value.popBackStack(destinationId, inclusive)
+        } else if (value.previousBackStackEntry != null) {
             value.popBackStack()
-//            if (!controller.popBackStack()) {
-//                onNavigationFailure?.invoke()
-//            }
         }
     }
+
 }
