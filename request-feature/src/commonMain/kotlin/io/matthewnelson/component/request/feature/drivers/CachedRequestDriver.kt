@@ -29,8 +29,7 @@ open class CachedRequestDriver<T: Any>(
     // For android, 3 is a good value. This really depends on if you have navigation being
     // executed automatically w/o user input (say, after animation completes). This is due
     // to configuration changes which make tracking what requests have been executed a necessity.
-    val replayCacheSize: Int,
-    private val whenTrueExecuteRequest: (suspend (instance: T, request: Request<T>) -> Boolean)? = null
+    val replayCacheSize: Int
 ): RequestDriver<T>() {
 
     init {
@@ -42,6 +41,8 @@ open class CachedRequestDriver<T: Any>(
     private val executedRequestsLock = Mutex()
     private val executedRequests: MutableList<RandomId> = ArrayList(replayCacheSize)
 
+    open suspend fun whenTrueExecuteRequest(instance: T, request: Request<T>): Boolean { return true }
+
     /**
      * Returns true if the request was executed, and false if it was not
      * */
@@ -52,7 +53,7 @@ open class CachedRequestDriver<T: Any>(
             }
 
 
-            if (whenTrueExecuteRequest?.invoke(instance, holder.request) == false) {
+            if (!whenTrueExecuteRequest(instance, holder.request)) {
                 return false
             }
 
@@ -70,7 +71,6 @@ open class CachedRequestDriver<T: Any>(
             }
         }
     }
-
 
     @Suppress("RemoveExplicitTypeArguments")
     private val requestSharedFlow: MutableSharedFlow<RequestHolder<T>> by lazy {
