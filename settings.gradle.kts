@@ -9,7 +9,7 @@ include(":request-concept")
 @Suppress("PrivatePropertyName")
 private val KMP_TARGETS: String? by settings
 if (KMP_TARGETS?.split(',')?.contains("ANDROID") != false) {
-    include(":extensions:androidx-navigation")
+    include(":extensions:navigation-androidx")
 
     include(":samples:app-android")
     include(":samples:activity")

@@ -22,7 +22,7 @@ import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
-import io.matthewnelson.component.request.androidx.navigation.PopBackStack
+import io.matthewnelson.component.request.extension.navigation.androidx.PopBackStack
 import io.matthewnelson.component.request.feature.AndroidRequestCollector
 import io.matthewnelson.component.request.feature.drivers.RequestDriver
 import io.matthewnelson.component.request.sample.activity.main.databinding.ActivityMainBinding

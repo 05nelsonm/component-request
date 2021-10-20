@@ -16,7 +16,7 @@
 package io.matthewnelson.component.request.sample.screen.c.navigation
 
 import androidx.navigation.NavController
-import io.matthewnelson.component.request.androidx.navigation.DefaultNavAnims
+import io.matthewnelson.component.request.extension.navigation.androidx.DefaultNavAnims
 import io.matthewnelson.component.request.concept.Request
 import io.matthewnelson.component.request.sample.screen.c.R
 import io.matthewnelson.component.request.sample.screen.c.ui.ScreenCArgs

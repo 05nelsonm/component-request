@@ -13,18 +13,24 @@
 *  See the License for the specific language governing permissions and
 *  limitations under the License.
 * */
-package io.matthewnelson.component.request.androidx.navigation
+package io.matthewnelson.component.request.extension.navigation.androidx
 
-import androidx.navigation.NavOptions
+import androidx.annotation.IdRes
+import androidx.navigation.NavController
+import io.matthewnelson.component.request.concept.Request
 
-@Suppress("unused", "SpellCheckingInspection")
-object DefaultNavAnims {
+open class PopBackStack(
+    @IdRes
+    val destinationId: Int? = null,
+    val inclusive: Boolean = false,
+): Request<NavController>() {
 
-    @Suppress("SpellCheckingInspection")
-    val builder: NavOptions.Builder
-        get() = NavOptions.Builder()
-            .setEnterAnim(R.anim.slide_in_left)
-            .setExitAnim(R.anim.slide_out_left)
-            .setPopEnterAnim(R.anim.slide_in_right)
-            .setPopExitAnim(R.anim.slide_out_right)
+    override fun execute(value: NavController) {
+        if (destinationId != null) {
+            value.popBackStack(destinationId, inclusive)
+        } else if (value.previousBackStackEntry != null) {
+            value.popBackStack()
+        }
+    }
+
 }

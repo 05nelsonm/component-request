@@ -16,7 +16,7 @@
 package io.matthewnelson.component.request.sample.screen.b.navigation
 
 import androidx.navigation.NavController
-import io.matthewnelson.component.request.androidx.navigation.PopBackStack
+import io.matthewnelson.component.request.extension.navigation.androidx.PopBackStack
 import io.matthewnelson.component.request.concept.BaseRequestDriver
 import javax.inject.Inject
 

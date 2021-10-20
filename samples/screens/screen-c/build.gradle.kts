@@ -22,7 +22,7 @@ kmpConfiguration {
                 },
                 mainSourceSet = {
                     dependencies {
-                        api(project(":extensions:androidx-navigation"))
+                        api(project(":extensions:navigation-androidx"))
                         api(deps.androidx.navigation.fragment)
                         implementation(deps.viewBindingDelegateNoReflect)
                         implementation(deps.androidx.constraintLayout)
