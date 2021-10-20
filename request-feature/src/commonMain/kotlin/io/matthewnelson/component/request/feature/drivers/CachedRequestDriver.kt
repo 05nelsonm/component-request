@@ -47,7 +47,7 @@ open class CachedRequestDriver<T: Any>(
      * */
     override suspend fun executeRequest(instance: T, holder: RequestHolder<T>): Boolean {
         executedRequestsLock.withLock {
-            if (executedRequests.contains(holder.getId())) {
+            if (executedRequests.contains(holder.id)) {
                 return false
             }
 
@@ -60,7 +60,7 @@ open class CachedRequestDriver<T: Any>(
                 if (executedRequests.size == replayCacheSize) {
                     executedRequests.removeFirst()
                 }
-                executedRequests.add(holder.getId())
+                executedRequests.add(holder.id)
 
                 holder.request.execute(instance)
 
