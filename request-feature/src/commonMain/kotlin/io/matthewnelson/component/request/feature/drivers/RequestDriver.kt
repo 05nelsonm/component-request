@@ -17,8 +17,16 @@ package io.matthewnelson.component.request.feature.drivers
 
 import io.matthewnelson.component.request.feature.util.RequestHolder
 import io.matthewnelson.component.request.concept.BaseRequestDriver
+import io.matthewnelson.component.request.concept.Request
 
 abstract class RequestDriver<T: Any>: BaseRequestDriver<T>() {
+
+    /**
+     * Returns true when [Request.execute] was called for the given [RequestHolder]'s
+     * [Request]
+     *
+     * Returns false when it has not.
+     * */
     abstract suspend fun executeRequest(instance: T, holder: RequestHolder<T>): Boolean
 
     abstract suspend fun collect(action: suspend (value: RequestHolder<T>) -> Unit)
