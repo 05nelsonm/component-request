@@ -1,7 +1,7 @@
 package io.matthewnelson.component.request.feature.drivers
 
 import io.matthewnelson.component.request.feature.util.RequestHolder
-import io.matthewnelson.component.request.feature.util.RequestId
+import io.matthewnelson.component.request.feature.util.RandomId
 import io.matthewnelson.component.request.concept.Request
 import kotlinx.coroutines.currentCoroutineContext
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -13,7 +13,7 @@ import kotlinx.coroutines.sync.withLock
 
 /**
  * Caches submitted requests such that upon collection, all requests (up to the [replayCacheSize]
- * specified) are replayed. Already executed requests are tracked by their [RequestId], such that
+ * specified) are replayed. Already executed requests are tracked by their [RandomId], such that
  * [CachedRequestDriver.executeRequest] will return `false` if it has already been executed; this is
  * necessary for platforms such as Android, where configuration changes could interrupt submission
  * and/or collection.
@@ -40,7 +40,7 @@ open class CachedRequestDriver<T: Any>(
     }
 
     private val executedRequestsLock = Mutex()
-    private val executedRequests: MutableList<RequestId> = ArrayList(replayCacheSize)
+    private val executedRequests: MutableList<RandomId> = ArrayList(replayCacheSize)
 
     /**
      * Returns true if the request was executed, and false if it was not
@@ -73,19 +73,19 @@ open class CachedRequestDriver<T: Any>(
 
 
     @Suppress("RemoveExplicitTypeArguments")
-    private val _requestSharedFlow: MutableSharedFlow<RequestHolder<T>> by lazy {
+    private val requestSharedFlow: MutableSharedFlow<RequestHolder<T>> by lazy {
         MutableSharedFlow<RequestHolder<T>>(replayCacheSize)
     }
 
     override suspend fun collect(action: suspend (value: RequestHolder<T>) -> Unit) {
-        _requestSharedFlow.asSharedFlow().collect { action.invoke(it) }
+        requestSharedFlow.asSharedFlow().collect { action.invoke(it) }
     }
 
     /**
-     * Assigns a [RequestId] to the navigation request such that execution of it
+     * Assigns a [RandomId] to the navigation request such that execution of it
      * can be tracked.
      * */
     override suspend fun submitRequest(request: Request<T>) {
-        _requestSharedFlow.emit(RequestHolder(request))
+        requestSharedFlow.emit(RequestHolder(request))
     }
 }

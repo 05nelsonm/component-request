@@ -18,14 +18,14 @@ package io.matthewnelson.component.request.feature.util
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
-class RequestIdUnitTest {
+class RandomIdUnitTest {
 
     @Test
     fun testIdUniqueness() {
         val expected = 1_000
-        val list: MutableSet<RequestId> = LinkedHashSet(expected)
+        val list: MutableSet<RandomId> = LinkedHashSet(expected)
         repeat(expected) {
-            list.add(RequestId())
+            list.add(RandomId())
         }
 
         assertEquals(expected, list.size)

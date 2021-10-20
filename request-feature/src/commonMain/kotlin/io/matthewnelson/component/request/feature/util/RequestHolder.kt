@@ -7,7 +7,7 @@ import io.matthewnelson.component.request.concept.Request
  * execution.
  * */
 class RequestHolder<T: Any>(val request: Request<T>) {
-    private val id: RequestId = RequestId()
+    private val id: RandomId = RandomId()
 
-    internal fun getId(): RequestId = id
+    internal fun getId(): RandomId = id
 }
