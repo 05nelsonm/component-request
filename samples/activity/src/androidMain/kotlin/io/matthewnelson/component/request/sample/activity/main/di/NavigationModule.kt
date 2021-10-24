@@ -28,7 +28,7 @@ import io.matthewnelson.component.request.sample.screen.a.navigation.ScreenBText
 import io.matthewnelson.component.request.sample.screen.a.navigation.ScreenCText
 import io.matthewnelson.component.request.sample.screen.b.navigation.ScreenBNavigationRequest
 import io.matthewnelson.component.request.sample.screen.c.navigation.ScreenCNavigationRequest
-import io.matthewnelson.component.request.concept.BaseRequestDriver
+import io.matthewnelson.component.request.extension.navigation.Navigator
 
 @Module
 @InstallIn(ActivityRetainedComponent::class)
@@ -40,21 +40,21 @@ internal object NavigationModule {
         CachedRequestDriver(replayCacheSize = 3)
 
     @Provides
-    fun provideBaseNavigationDriver(
-        driver: RequestDriver<NavController>
-    ): BaseRequestDriver<NavController> =
-        driver
-
-    @Provides
     fun provideScreenANavigator(
         driver: RequestDriver<NavController>
     ): ScreenANavigator<NavController> =
         object : ScreenANavigator<NavController>(driver) {
             override suspend fun toScreenB(text: ScreenBText?) {
-                requestDriver.submitRequest(ScreenBNavigationRequest(text?.value))
+                driver.submitRequest(ScreenBNavigationRequest(text?.value))
             }
             override suspend fun toScreenC(text: ScreenCText?) {
-                requestDriver.submitRequest(ScreenCNavigationRequest(text?.value))
+                driver.submitRequest(ScreenCNavigationRequest(text?.value))
             }
         }
+
+    @Provides
+    fun provideNavigator(
+        screenANavigator: ScreenANavigator<NavController>
+    ): Navigator<NavController> =
+        screenANavigator
 }

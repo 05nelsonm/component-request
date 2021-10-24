@@ -35,7 +35,7 @@ kmpConfiguration {
 
         commonMainSourceSet = {
             dependencies {
-                api(project(":request-concept"))
+                api(project(":extensions:navigation"))
             }
         },
         commonTestSourceSet = null

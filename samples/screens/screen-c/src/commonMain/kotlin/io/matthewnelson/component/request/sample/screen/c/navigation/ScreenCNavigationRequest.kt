@@ -15,4 +15,6 @@
 * */
 package io.matthewnelson.component.request.sample.screen.c.navigation
 
-expect class ScreenCNavigationRequest
+expect class ScreenCNavigationRequest(textArg: String?) {
+    val textArg: String?
+}
