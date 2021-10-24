@@ -20,12 +20,16 @@ kmpConfiguration {
                 },
                 mainSourceSet = {
                     dependencies {
-                        api(project(":request-concept"))
                         implementation(deps.androidx.navigation.fragment)
                     }
                 }
             ),
-        )
+        ),
+        commonMainSourceSet = {
+            dependencies {
+                api(project(":extensions:navigation"))
+            }
+        }
     )
 }
 

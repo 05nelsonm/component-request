@@ -17,13 +17,13 @@ package io.matthewnelson.component.request.extension.navigation.androidx
 
 import androidx.annotation.IdRes
 import androidx.navigation.NavController
-import io.matthewnelson.component.request.concept.Request
+import io.matthewnelson.component.request.extension.navigation.NavigateBack
 
 open class PopBackStack(
     @IdRes
     val destinationId: Int? = null,
     val inclusive: Boolean = false,
-): Request<NavController>() {
+): NavigateBack<NavController>() {
 
     override fun execute(value: NavController) {
         if (destinationId != null) {
