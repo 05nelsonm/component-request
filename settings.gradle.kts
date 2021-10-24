@@ -21,3 +21,9 @@ private val KMP_TARGETS_ALL: String? by settings
 if (KMP_TARGETS_ALL != null || KMP_TARGETS?.split(',')?.contains("ANDROID") != false) {
     include(":samples:app-android")
 }
+
+@Suppress("PrivatePropertyName")
+private val CHECK_PUBLICATION: String? by settings
+if (CHECK_PUBLICATION != null) {
+    include(":tools:check-publication")
+}
