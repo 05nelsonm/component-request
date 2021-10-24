@@ -1,3 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
 /*
 *  Copyright 2021 Matthew Nelson
 *
@@ -13,8 +15,5 @@
 *  See the License for the specific language governing permissions and
 *  limitations under the License.
 * */
-package io.matthewnelson.component.request.sample.screen.b.navigation
-
-internal expect class ScreenBNavigator {
-    suspend fun navigateUp()
-}
+-->
+<manifest package="io.matthewnelson.component.request.extension.navigation" />

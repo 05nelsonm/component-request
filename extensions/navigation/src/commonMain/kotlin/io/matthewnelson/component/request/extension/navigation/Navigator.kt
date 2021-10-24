@@ -13,17 +13,18 @@
 *  See the License for the specific language governing permissions and
 *  limitations under the License.
 * */
-package io.matthewnelson.component.request.sample.screen.c.navigation
+package io.matthewnelson.component.request.extension.navigation
 
-import androidx.navigation.NavController
-import io.matthewnelson.component.request.extension.navigation.androidx.PopBackStack
 import io.matthewnelson.component.request.concept.BaseRequestDriver
-import javax.inject.Inject
 
-internal actual class ScreenCNavigator @Inject constructor(
-    private val requestDriver: BaseRequestDriver<NavController>
-) {
-    actual suspend fun navigateUp() {
-        requestDriver.submitRequest(PopBackStack())
+/**
+ * Underlying class to screen modules whereby accessibility to a common "go back"
+ * method is always available.
+ * */
+abstract class Navigator<T: Any>(protected val driver: BaseRequestDriver<T>) {
+
+    open suspend fun navigateBack(request: NavigateBack<T>) {
+        driver.submitRequest(request)
     }
+
 }

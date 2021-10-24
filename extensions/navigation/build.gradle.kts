@@ -43,13 +43,17 @@ kmpConfiguration {
             KmpTarget.NonJvm.Native.Unix.Linux.X64.DEFAULT,
             KmpTarget.NonJvm.Native.Mingw.X64.DEFAULT,
         ),
-        commonMainSourceSet = null,
-        commonTestSourceSet = null,
+        commonMainSourceSet = {
+            dependencies {
+                api(project(":request-concept"))
+            }
+        },
     )
 }
 
 kmpPublish {
     setupModule(
-        pomDescription = "Kotlin Components' Request Concept"
+        pomArtifactId = "request-extension-navigation",
+        pomDescription = "Kotlin Components' Request Extension for navigation"
     )
 }

@@ -21,8 +21,8 @@ import io.matthewnelson.component.request.concept.Request
 import io.matthewnelson.component.request.sample.screen.b.R
 import io.matthewnelson.component.request.sample.screen.b.ui.ScreenBArgs
 
-actual class ScreenBNavigationRequest(
-    private val textArg: String?
+actual class ScreenBNavigationRequest actual constructor(
+    actual val textArg: String?
 ): Request<NavController>() {
     override fun execute(value: NavController) {
         value.navigate(

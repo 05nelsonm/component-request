@@ -19,10 +19,12 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.NavController
 import androidx.navigation.fragment.navArgs
 import by.kirich1409.viewbindingdelegate.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
-import io.matthewnelson.component.request.sample.screen.c.navigation.ScreenCNavigator
+import io.matthewnelson.component.request.extension.navigation.Navigator
+import io.matthewnelson.component.request.extension.navigation.androidx.PopBackStack
 import io.matthewnelson.component.request.sample.screen.c.R
 import io.matthewnelson.component.request.sample.screen.c.databinding.FragmentCBinding
 import kotlinx.coroutines.launch
@@ -33,7 +35,7 @@ internal actual class ScreenC: Fragment(R.layout.fragment_c) {
 
     @Inject
     @Suppress("ProtectedInFinal")
-    protected lateinit var navigator: ScreenCNavigator
+    protected lateinit var navigator: Navigator<NavController>
 
     private val args: ScreenCArgs by navArgs()
 
@@ -46,7 +48,7 @@ internal actual class ScreenC: Fragment(R.layout.fragment_c) {
             textViewScreenCArgs.text = args.text
             buttonScreenCBack.setOnClickListener {
                 lifecycleScope.launch {
-                    navigator.navigateUp()
+                    navigator.navigateBack(PopBackStack())
                 }
             }
         }

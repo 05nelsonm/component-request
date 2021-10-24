@@ -13,8 +13,14 @@
 *  See the License for the specific language governing permissions and
 *  limitations under the License.
 * */
-package io.matthewnelson.component.request.sample.screen.c.navigation
+package io.matthewnelson.component.request.extension.navigation
 
-internal expect class ScreenCNavigator {
-    suspend fun navigateUp()
-}
+import io.matthewnelson.component.request.concept.Request
+
+/**
+ * A special [Request] for navigating back. Various platforms have different
+ * implementations, but this special [Request] is used in the underlying [Navigator]
+ * class when utilizing the navigation extension and defined in platform specific
+ * navigation extensions.
+ * */
+abstract class NavigateBack<T: Any>: Request<T>()
