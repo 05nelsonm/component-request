@@ -54,17 +54,13 @@ kmpConfiguration {
                 },
             ),
 
-            KmpTarget.NonJvm.Native.Unix.Darwin.Ios.All(/*enableSimulator = {}*/),
+            KmpTarget.NonJvm.Native.Unix.Darwin.Ios.All.DEFAULT,
             KmpTarget.NonJvm.Native.Unix.Darwin.Macos.X64.DEFAULT,
             KmpTarget.NonJvm.Native.Unix.Darwin.Macos.Arm64.DEFAULT,
-            KmpTarget.NonJvm.Native.Unix.Darwin.Tvos.All(/*enableSimulator = {}*/),
-            KmpTarget.NonJvm.Native.Unix.Darwin.Watchos.All(/*enableSimulator = {}*/),
-//            KmpTarget.NonJvm.Native.Unix.Linux.Arm32Hfp.DEFAULT,
-//            KmpTarget.NonJvm.Native.Unix.Linux.Mips32.DEFAULT,
-//            KmpTarget.NonJvm.Native.Unix.Linux.Mipsel32.DEFAULT,
+            KmpTarget.NonJvm.Native.Unix.Darwin.Tvos.All.DEFAULT,
+            KmpTarget.NonJvm.Native.Unix.Darwin.Watchos.All.DEFAULT,
             KmpTarget.NonJvm.Native.Unix.Linux.X64.DEFAULT,
             KmpTarget.NonJvm.Native.Mingw.X64.DEFAULT,
-//            KmpTarget.NonJvm.Native.Mingw.X86.DEFAULT,
         ),
         commonMainSourceSet = {
             dependencies {

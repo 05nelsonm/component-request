@@ -2,7 +2,7 @@ import io.matthewnelson.kotlin.components.dependencies.deps
 import io.matthewnelson.kotlin.components.dependencies.depsKapt
 import io.matthewnelson.kotlin.components.dependencies.versions
 import io.matthewnelson.kotlin.components.kmp.KmpTarget
-import io.matthewnelson.kotlin.components.kmp.kapt
+import io.matthewnelson.kotlin.components.kmp.util.kapt
 
 plugins {
     id("kmp-configuration")
