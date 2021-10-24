@@ -47,12 +47,13 @@ internal actual class MainActivity: AppCompatActivity(R.layout.activity_main) {
         driverProvider = { driver },
         instanceProvider = { controller },
         onPostRequestExecution = { /* save state */ },
+        eventsToObserve = AndroidRequestCollector.Events.StartStop,
         dispatcher = Dispatchers.Main.immediate
     )
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        collector.observeStartStopForCollection(owner = this)
+        collector.observeLifecycleForCollection(owner = this)
     }
 
     override fun onBackPressed() {

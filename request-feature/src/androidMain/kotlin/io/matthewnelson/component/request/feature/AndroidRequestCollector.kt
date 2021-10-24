@@ -24,13 +24,14 @@ import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 
 /**
- * A collector for Android that hooks into the lifecycle owner's onStart/onStop
- * events. This is safe for use with UI/navigation components.
+ * A collector for Android that hooks into the lifecycle owner to start
+ * and stop collection with LCE's as defined by [eventsToObserve] argument.
  * */
 class AndroidRequestCollector<T: Any>(
     driverProvider: () -> RequestDriver<T>,
     instanceProvider: () -> T,
     onPostRequestExecution: (suspend (Request<T>) -> Unit)? = null,
+    val eventsToObserve: Events = Events.StartStop,
     private val dispatcher: CoroutineDispatcher = Dispatchers.Main.immediate,
 ): RequestCollector<T>(
     driverProvider,
@@ -38,26 +39,66 @@ class AndroidRequestCollector<T: Any>(
     onPostRequestExecution,
 ) {
 
-    private inner class StartStopObserver: DefaultLifecycleObserver {
-        override fun onStart(owner: LifecycleOwner) {
-            super.onStart(owner)
-            startCollecting(owner.lifecycleScope, dispatcher)
+    enum class Events {
+        StartStop,
+        ResumePause,
+        CreateDestroy
+    }
+
+    private inner class CollectionObserver: DefaultLifecycleObserver {
+
+        // Events.CreateDestroy
+        override fun onCreate(owner: LifecycleOwner) {
+            super.onCreate(owner)
+            if (eventsToObserve == Events.CreateDestroy) {
+                startCollecting(owner.lifecycleScope, dispatcher)
+            }
+        }
+        override fun onDestroy(owner: LifecycleOwner) {
+            super.onDestroy(owner)
+            if (eventsToObserve == Events.CreateDestroy) {
+                stopCollecting()
+            }
         }
 
+        // Events.StartStop
+        override fun onStart(owner: LifecycleOwner) {
+            super.onStart(owner)
+            if (eventsToObserve == Events.StartStop) {
+                startCollecting(owner.lifecycleScope, dispatcher)
+            }
+        }
         override fun onStop(owner: LifecycleOwner) {
             super.onStop(owner)
-            stopCollecting()
+            if (eventsToObserve == Events.StartStop) {
+                stopCollecting()
+            }
+        }
+
+        // Events.ResumePause
+        override fun onResume(owner: LifecycleOwner) {
+            super.onResume(owner)
+            if (eventsToObserve == Events.ResumePause) {
+                startCollecting(owner.lifecycleScope, dispatcher)
+            }
+        }
+
+        override fun onPause(owner: LifecycleOwner) {
+            super.onPause(owner)
+            if (eventsToObserve == Events.ResumePause) {
+                stopCollecting()
+            }
         }
     }
 
-    private val startStopObserver by lazy { StartStopObserver() }
+    private val collectionObserver by lazy { CollectionObserver() }
 
-    fun observeStartStopForCollection(owner: LifecycleOwner) {
-        owner.lifecycle.addObserver(startStopObserver)
+    fun observeLifecycleForCollection(owner: LifecycleOwner) {
+        owner.lifecycle.addObserver(collectionObserver)
     }
 
     fun removeObserver(owner: LifecycleOwner, stopCollecting: Boolean = true) {
-        owner.lifecycle.removeObserver(startStopObserver)
+        owner.lifecycle.removeObserver(collectionObserver)
         if (stopCollecting) {
             stopCollecting()
         }
