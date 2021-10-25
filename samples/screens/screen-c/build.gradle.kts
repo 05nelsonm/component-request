@@ -22,7 +22,7 @@ kmpConfiguration {
                 },
                 mainSourceSet = {
                     dependencies {
-                        api(project(":extensions:navigation-androidx"))
+                        api(project(":extensions:request-extension-navigation-androidx"))
                         api(deps.androidx.navigation.fragment)
                         implementation(deps.viewBindingDelegateNoReflect)
                         implementation(deps.androidx.constraintLayout)
@@ -35,7 +35,7 @@ kmpConfiguration {
 
         commonMainSourceSet = {
             dependencies {
-                api(project(":extensions:navigation"))
+                api(project(":extensions:request-extension-navigation"))
             }
         },
         commonTestSourceSet = null

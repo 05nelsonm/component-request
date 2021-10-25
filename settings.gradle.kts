@@ -5,8 +5,8 @@ includeBuild("kotlin-components/includeBuild/kmp")
 
 include(":request-concept")
 include(":request-feature")
-include(":extensions:navigation")
-include(":extensions:navigation-androidx")
+include(":extensions:request-extension-navigation")
+include(":extensions:request-extension-navigation-androidx")
 
 include(":samples:activity")
 include(":samples:screens:screen-a")
