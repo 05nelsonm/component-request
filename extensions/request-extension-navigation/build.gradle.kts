@@ -53,7 +53,6 @@ kmpConfiguration {
 
 kmpPublish {
     setupModule(
-        pomArtifactId = "request-extension-navigation",
         pomDescription = "Kotlin Components' Request Extension for navigation"
     )
 }

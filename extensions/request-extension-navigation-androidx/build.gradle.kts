@@ -27,7 +27,7 @@ kmpConfiguration {
         ),
         commonMainSourceSet = {
             dependencies {
-                api(project(":extensions:navigation"))
+                api(project(":extensions:request-extension-navigation"))
             }
         }
     )
@@ -35,7 +35,6 @@ kmpConfiguration {
 
 kmpPublish {
     setupModule(
-        pomArtifactId = "request-extension-navigation-androidx",
         pomDescription = "Kotlin Components' Request Concept extension for androidx navigation"
     )
 }
