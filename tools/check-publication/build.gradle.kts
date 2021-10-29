@@ -31,9 +31,9 @@ kmpConfiguration {
             KmpTarget.Jvm.Jvm.DEFAULT,
 
             KmpTarget.Jvm.Android(
-                buildTools = versions.buildTools,
-                compileSdk = versions.sdkCompile,
-                minSdk = versions.sdkMin16,
+                buildTools = versions.android.buildTools,
+                compileSdk = versions.android.sdkCompile,
+                minSdk = versions.android.sdkMin16,
                 mainSourceSet = {
                     project.kmpPublishRootProjectConfiguration?.let { config ->
                         dependencies {
