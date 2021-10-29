@@ -31,9 +31,9 @@ kmpConfiguration {
             KmpTarget.Jvm.Jvm.DEFAULT,
 
             KmpTarget.Jvm.Android(
-                buildTools = versions.buildTools,
-                compileSdk = versions.sdkCompile,
-                minSdk = versions.sdkMin16,
+                buildTools = versions.android.buildTools,
+                compileSdk = versions.android.sdkCompile,
+                minSdk = versions.android.sdkMin16,
                 mainSourceSet = {
                     project.kmpPublishRootProjectConfiguration?.let { config ->
                         dependencies {
@@ -67,7 +67,7 @@ kmpConfiguration {
             project.kmpPublishRootProjectConfiguration?.let { config ->
                 dependencies {
                     implementation("${config.group}:request-concept:${config.versionName}")
-                    implementation("${config.group}:request-feature:${config.versionName}")
+                    implementation("${config.group}:request-feature:${config.versionName}.0.0")
                     implementation("${config.group}:request-extension-navigation:${config.versionName}")
                 }
             }

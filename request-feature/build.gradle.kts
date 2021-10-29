@@ -5,7 +5,6 @@ import io.matthewnelson.kotlin.components.kmp.KmpTarget
 import org.jetbrains.kotlin.gradle.plugin.KotlinJsCompilerType
 
 plugins {
-    id("dependencies")
     id("kmp-configuration")
     id("kmp-publish")
 }
@@ -24,9 +23,9 @@ kmpConfiguration {
             ),
 
             KmpTarget.Jvm.Android(
-                buildTools = versions.buildTools,
-                compileSdk = versions.sdkCompile,
-                minSdk = versions.sdkMin16,
+                buildTools = versions.android.buildTools,
+                compileSdk = versions.android.sdkCompile,
+                minSdk = versions.android.sdkMin16,
                 target = {
                     publishLibraryVariants("release")
                 },
@@ -47,11 +46,7 @@ kmpConfiguration {
                     jsNodeDsl = null
                 ),
                 mainSourceSet = null,
-                testSourceSet = {
-                    dependencies {
-                        implementation(kotlin("test-js"))
-                    }
-                },
+                testSourceSet = null,
             ),
 
             KmpTarget.NonJvm.Native.Unix.Darwin.Ios.All.DEFAULT,
@@ -79,6 +74,9 @@ kmpConfiguration {
 
 kmpPublish {
     setupModule(
-        pomDescription = "Kotlin Components' Request Feature"
+        pomDescription = "Kotlin Components' Request Feature",
+        versionNameOverride = "2.0.0",
+        versionCodeOverride = 200000,
+        holdPublication = false,
     )
 }
