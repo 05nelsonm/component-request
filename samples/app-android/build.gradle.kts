@@ -7,12 +7,11 @@ plugins {
     id("kotlin-android")
     id("kotlin-kapt")
     id("dagger.hilt.android.plugin")
-    id("dependencies")
 }
 
 android {
-    compileSdk = versions.sdkCompile
-    buildToolsVersion = versions.buildTools
+    compileSdk = versions.android.sdkCompile
+    buildToolsVersion = versions.android.buildTools
 
     packagingOptions {
         resources.excludes.add("META-INF/gradle/incremental.annotation.processors")
@@ -20,8 +19,8 @@ android {
 
     defaultConfig {
         applicationId = "io.matthewnelson.sampleandroid"
-        minSdk = versions.sdkMin23
-        targetSdk = versions.sdkTarget
+        minSdk = versions.android.sdkMin23
+        targetSdk = versions.android.sdkTarget
         versionCode = 1
         versionName = "1.0.0"
 

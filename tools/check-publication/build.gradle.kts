@@ -67,7 +67,7 @@ kmpConfiguration {
             project.kmpPublishRootProjectConfiguration?.let { config ->
                 dependencies {
                     implementation("${config.group}:request-concept:${config.versionName}")
-                    implementation("${config.group}:request-feature:${config.versionName}")
+                    implementation("${config.group}:request-feature:${config.versionName}.0.0")
                     implementation("${config.group}:request-extension-navigation:${config.versionName}")
                 }
             }
