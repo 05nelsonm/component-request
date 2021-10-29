@@ -53,6 +53,6 @@ kmpConfiguration {
 kmpPublish {
     setupModule(
         pomDescription = "Kotlin Components' Request Extension for navigation",
-        holdPublication = false,
+        holdPublication = true,
     )
 }

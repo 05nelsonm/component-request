@@ -50,6 +50,6 @@ kmpConfiguration {
 kmpPublish {
     setupModule(
         pomDescription = "Kotlin Components' Request Concept",
-        holdPublication = false,
+        holdPublication = true,
     )
 }

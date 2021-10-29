@@ -35,6 +35,6 @@ kmpConfiguration {
 kmpPublish {
     setupModule(
         pomDescription = "Kotlin Components' Request Concept extension for androidx navigation",
-        holdPublication = false,
+        holdPublication = true,
     )
 }

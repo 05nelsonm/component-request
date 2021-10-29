@@ -59,7 +59,11 @@ kmpConfiguration {
         ),
         commonMainSourceSet = {
             dependencies {
-                api(project(":request-concept"))
+//                api(project(":request-concept"))
+
+                // use published version for c-interop compatibility when
+                // publishing future minor versions of `-feature` only
+                api(deps.components.request.concept)
                 implementation(deps.kotlin.coroutines.core)
             }
         },
@@ -75,8 +79,8 @@ kmpConfiguration {
 kmpPublish {
     setupModule(
         pomDescription = "Kotlin Components' Request Feature",
-        versionNameOverride = "2.0.0",
-        versionCodeOverride = 200000,
+        versionNameOverride = "2.1.0-SNAPSHOT",
+        versionCodeOverride = 210000,
         holdPublication = false,
     )
 }
