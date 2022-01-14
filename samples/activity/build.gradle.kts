@@ -39,6 +39,5 @@ kmpConfiguration {
                 api(project(":samples:screens:screen-c"))
             }
         },
-        commonTestSourceSet = null
     )
 }

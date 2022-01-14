@@ -34,13 +34,6 @@ kmpConfiguration {
                 buildTools = versions.android.buildTools,
                 compileSdk = versions.android.sdkCompile,
                 minSdk = versions.android.sdkMin16,
-                mainSourceSet = {
-                    project.kmpPublishRootProjectConfiguration?.let { config ->
-                        dependencies {
-                            implementation("${config.group}:request-extension-navigation-androidx:${config.versionName}")
-                        }
-                    }
-                }
             ),
 
             KmpTarget.NonJvm.JS(
@@ -55,20 +48,23 @@ kmpConfiguration {
                 testSourceSet = null,
             ),
 
-            KmpTarget.NonJvm.Native.Unix.Darwin.Ios.All.DEFAULT,
+            KmpTarget.NonJvm.Native.Unix.Darwin.Ios.All(enableSimulator = {}),
             KmpTarget.NonJvm.Native.Unix.Darwin.Macos.X64.DEFAULT,
             KmpTarget.NonJvm.Native.Unix.Darwin.Macos.Arm64.DEFAULT,
-            KmpTarget.NonJvm.Native.Unix.Darwin.Tvos.All.DEFAULT,
-            KmpTarget.NonJvm.Native.Unix.Darwin.Watchos.All.DEFAULT,
+            KmpTarget.NonJvm.Native.Unix.Darwin.Tvos.All(enableSimulator = {}),
+            KmpTarget.NonJvm.Native.Unix.Darwin.Watchos.All(enableSimulator = {}),
+
             KmpTarget.NonJvm.Native.Unix.Linux.X64.DEFAULT,
+
             KmpTarget.NonJvm.Native.Mingw.X64.DEFAULT,
         ),
         commonMainSourceSet = {
             project.kmpPublishRootProjectConfiguration?.let { config ->
                 dependencies {
                     implementation("${config.group}:request-concept:${config.versionName}")
-                    implementation("${config.group}:request-feature:${config.versionName}.0.0")
+                    implementation("${config.group}:request-feature:${config.versionName}")
                     implementation("${config.group}:request-extension-navigation:${config.versionName}")
+                    implementation("${config.group}:request-extension-navigation-androidx:${config.versionName}")
                 }
             }
         }

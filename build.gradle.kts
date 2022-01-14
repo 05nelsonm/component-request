@@ -18,8 +18,6 @@ buildscript {
         classpath(io.matthewnelson.kotlin.components.dependencies.plugins.androidx.navigation.safeArgs)
         classpath(io.matthewnelson.kotlin.components.dependencies.plugins.google.hilt)
         classpath(io.matthewnelson.kotlin.components.dependencies.plugins.kotlin.gradle)
-        classpath(io.matthewnelson.kotlin.components.dependencies.plugins.kotlin.dokka)
-        classpath(io.matthewnelson.kotlin.components.dependencies.plugins.intellij)
         classpath(io.matthewnelson.kotlin.components.dependencies.plugins.mavenPublish)
 
         // NOTE: Do not place your application dependencies here; they belong
@@ -51,8 +49,8 @@ plugins {
 
 kmpPublish {
     setupRootProject(
-        versionName = "2",
-        versionCode = 200000,
+        versionName = "3.0.0-SNAPSHOT",
+        versionCode = /*0*/30000,
         pomInceptionYear = 2021,
     )
 }
