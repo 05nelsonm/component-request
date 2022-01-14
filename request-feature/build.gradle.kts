@@ -17,6 +17,7 @@ import io.matthewnelson.kotlin.components.dependencies.deps
 import io.matthewnelson.kotlin.components.dependencies.depsTest
 import io.matthewnelson.kotlin.components.dependencies.versions
 import io.matthewnelson.kotlin.components.kmp.KmpTarget
+import io.matthewnelson.kotlin.components.kmp.KmpTarget.Jvm.Android.Companion.SOURCE_SET_MAIN_NAME as KmpAndroidMain
 import org.jetbrains.kotlin.gradle.plugin.KotlinJsCompilerType
 
 plugins {
@@ -53,6 +54,9 @@ kmpConfiguration {
                         implementation(deps.androidx.lifecycle.commonJava8)
                         implementation(deps.androidx.lifecycle.runtime)
                     }
+                },
+                androidMainSourceSet = {
+                    manifest.srcFile("$projectDir/src/$KmpAndroidMain/AndroidManifest.xml")
                 }
             ),
 

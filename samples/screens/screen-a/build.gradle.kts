@@ -17,6 +17,7 @@ import io.matthewnelson.kotlin.components.dependencies.deps
 import io.matthewnelson.kotlin.components.dependencies.depsKapt
 import io.matthewnelson.kotlin.components.dependencies.versions
 import io.matthewnelson.kotlin.components.kmp.KmpTarget
+import io.matthewnelson.kotlin.components.kmp.KmpTarget.Jvm.Android.Companion.SOURCE_SET_MAIN_NAME as KmpAndroidMain
 import io.matthewnelson.kotlin.components.kmp.util.kapt
 
 plugins {
@@ -42,6 +43,9 @@ kmpConfiguration {
                         implementation(deps.google.hilt)
                         kapt(project, depsKapt.google.hilt)
                     }
+                },
+                androidMainSourceSet = {
+                    manifest.srcFile("$projectDir/src/$KmpAndroidMain/AndroidManifest.xml")
                 }
             ),
         ),
