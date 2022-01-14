@@ -15,4 +15,7 @@
  **/
 package io.matthewnelson.component.request.sample.screen.a.navigation
 
-expect value class ScreenCText(val value: String)
+import kotlin.jvm.JvmInline
+
+@JvmInline
+value class ScreenCText(val value: String)
