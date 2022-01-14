@@ -18,38 +18,19 @@ package io.matthewnelson.component.request.feature.drivers
 import io.matthewnelson.component.request.concept.Request
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.test.TestCoroutineDispatcher
-import kotlinx.coroutines.test.resetMain
-import kotlinx.coroutines.test.runBlockingTest
-import kotlinx.coroutines.test.setMain
-import org.junit.After
-import org.junit.Assert
-import org.junit.Before
-import org.junit.Test
+import kotlinx.coroutines.test.*
+import kotlin.test.Test
 import kotlin.test.assertEquals
+import kotlin.test.assertFalse
 
 @OptIn(ExperimentalCoroutinesApi::class)
-@Suppress("EXPERIMENTAL_API_USAGE")
 class CachedRequestDriverUnitTest {
 
     private val driver = CachedRequestDriver<Any>(5)
-    private val testDispatcher = TestCoroutineDispatcher()
-
-    @Before
-    fun setup() {
-        Dispatchers.setMain(testDispatcher)
-    }
-
-    @After
-    fun tearDown() {
-        Dispatchers.resetMain()
-        testDispatcher.cleanupTestCoroutines()
-    }
 
     @Test
-    fun executeRequestReturnsFalseIfAlreadyExecuted() =
-        testDispatcher.runBlockingTest {
+    fun givenAlreadyExecutedRequest_whenExecuteCalledAgain_returnsFalse() =
+        runTest {
             var executions = 0
             var replayNoExecute = 0
 
@@ -70,9 +51,11 @@ class CachedRequestDriverUnitTest {
             }
 
             driver.submitRequest(request)
+            delay(100L)
             assertEquals(1, executions)
 
             driver.submitRequest(request)
+            delay(100L)
             assertEquals(2, executions)
 
             collectionJob.cancel()
@@ -88,19 +71,21 @@ class CachedRequestDriverUnitTest {
                     }
                 }
             }
+            delay(100L)
 
             assertEquals(2, executions)
             assertEquals(2, replayNoExecute)
 
             driver.submitRequest(request)
+            delay(100L)
             assertEquals(3, executions)
 
             collectionJob.cancel()
         }
 
     @Test
-    fun requestExecutionOnlyWhenCoroutineIsActive() =
-        testDispatcher.runBlockingTest {
+    fun givenRequest_whenCoroutineIsCancelled_requestExecutionIsInhibited() =
+        runTest {
 
             val whenTrueExecuteSuspend = MutableStateFlow(false)
 
@@ -150,8 +135,8 @@ class CachedRequestDriverUnitTest {
             delay(500L)
 
             // Ensure still suspending
-            Assert.assertEquals(0, executions)
-            Assert.assertEquals(0, notExecuted)
+            assertEquals(0, executions)
+            assertEquals(0, notExecuted)
 
             // Proc execution
             whenTrueExecuteSuspend.value = true
@@ -159,11 +144,11 @@ class CachedRequestDriverUnitTest {
             delay(500L)
 
             // Ensure execution was had
-            Assert.assertEquals(1, executions)
-            Assert.assertEquals(0, notExecuted)
+            assertEquals(1, executions)
+            assertEquals(0, notExecuted)
 
             // suspension was reset to false
-            Assert.assertFalse(whenTrueExecuteSuspend.value)
+            assertFalse(whenTrueExecuteSuspend.value)
 
             // submission 2
             localDriver.submitRequest(request)
@@ -173,18 +158,18 @@ class CachedRequestDriverUnitTest {
             delay(500L)
 
             // Ensure still suspending
-            Assert.assertEquals(1, executions)
-            Assert.assertEquals(0, notExecuted)
+            assertEquals(1, executions)
+            assertEquals(0, notExecuted)
 
             collectionJob.cancelAndJoin()
 
             // Ensure no execution due to cancellation
-            Assert.assertEquals(1, executions)
+            assertEquals(1, executions)
 
             // cancellation of collectorJob should only complete code block
             // for submission 2 returning false due to Job.isActive == false.
             // submission 3 should not be collected and passed to driver for execution.
-            Assert.assertEquals(1, notExecuted)
+            assertEquals(1, notExecuted)
 
             collectionJob = launch {
                 localDriver.collect { request ->
@@ -199,26 +184,26 @@ class CachedRequestDriverUnitTest {
 
             // Ensure previously submitted, not executed due to cancellation, request
             // is still un-executed.
-            Assert.assertEquals(1, executions)
+            assertEquals(1, executions)
 
             // submission 1 in cache was replayed but not executed again
-            Assert.assertEquals(2, notExecuted)
+            assertEquals(2, notExecuted)
 
             // Cycle StateFlow for submission 2 from replay cache
             whenTrueExecuteSuspend.value = true
             delay(200L)
-            Assert.assertFalse(whenTrueExecuteSuspend.value)
+            assertFalse(whenTrueExecuteSuspend.value)
 
             // Ensure earlier request held in cache was properly executed upon re-collection.
-            Assert.assertEquals(2, executions)
-            Assert.assertEquals(2, notExecuted)
+            assertEquals(2, executions)
+            assertEquals(2, notExecuted)
 
             // Cycle StateFlow for submission 3 from replay cache
             whenTrueExecuteSuspend.value = true
             delay(200L)
 
             // Ensure submission 2 & 3 were executed
-            Assert.assertEquals(3, executions)
+            assertEquals(3, executions)
 
             // submission 4
             localDriver.submitRequest(request)
@@ -226,8 +211,8 @@ class CachedRequestDriverUnitTest {
             delay(100L)
 
             // Additional submission 4 executed properly
-            Assert.assertEquals(4, executions)
-            Assert.assertEquals(2, notExecuted)
+            assertEquals(4, executions)
+            assertEquals(2, notExecuted)
 
             collectionJob.cancelAndJoin()
         }
