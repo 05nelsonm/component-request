@@ -91,6 +91,7 @@ kmpConfiguration {
         commonTestSourceSet = {
             dependencies {
                 implementation(kotlin("test"))
+                implementation(depsTest.kotlin.coroutines)
             }
         },
     )
