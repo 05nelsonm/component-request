@@ -26,13 +26,12 @@ value class RandomId private constructor(val value: String) {
         private val CHARS: List<Char> = ('a'..'z') + ('A'..'Z') + ('0'..'9')
 
         operator fun invoke(size: Int = SIZE): RandomId =
-            CharArray(size).let { array ->
-
-                repeat(size) { index ->
-                    array[index] = CHARS[Random.nextInt(CHARS.size)]
+            StringBuilder(size).let { sb ->
+                repeat(size) {
+                    sb.append(CHARS[Random.nextInt(CHARS.size)])
                 }
 
-                RandomId(array.joinToString(""))
+                RandomId(sb.toString())
             }
     }
 }
