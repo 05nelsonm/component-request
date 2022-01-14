@@ -14,6 +14,7 @@ kmpConfiguration {
         setOf(
 
             KmpTarget.Jvm.Jvm(
+                kotlinJvmTarget = JavaVersion.VERSION_1_8,
                 testSourceSet = {
                     dependencies {
                         implementation(depsTest.kotlin.coroutines)
@@ -26,6 +27,9 @@ kmpConfiguration {
                 buildTools = versions.android.buildTools,
                 compileSdk = versions.android.sdkCompile,
                 minSdk = versions.android.sdkMin16,
+                kotlinJvmTarget = JavaVersion.VERSION_1_8,
+                compileSourceOption = JavaVersion.VERSION_1_8,
+                compileTargetOption = JavaVersion.VERSION_1_8,
                 target = {
                     publishLibraryVariants("release")
                 },
@@ -49,28 +53,25 @@ kmpConfiguration {
                 testSourceSet = null,
             ),
 
-            KmpTarget.NonJvm.Native.Unix.Darwin.Ios.All.DEFAULT,
+            KmpTarget.NonJvm.Native.Unix.Darwin.Ios.All(enableSimulator = {}),
             KmpTarget.NonJvm.Native.Unix.Darwin.Macos.X64.DEFAULT,
             KmpTarget.NonJvm.Native.Unix.Darwin.Macos.Arm64.DEFAULT,
-            KmpTarget.NonJvm.Native.Unix.Darwin.Tvos.All.DEFAULT,
-            KmpTarget.NonJvm.Native.Unix.Darwin.Watchos.All.DEFAULT,
+            KmpTarget.NonJvm.Native.Unix.Darwin.Tvos.All(enableSimulator = {}),
+            KmpTarget.NonJvm.Native.Unix.Darwin.Watchos.All(enableSimulator = {}),
+
             KmpTarget.NonJvm.Native.Unix.Linux.X64.DEFAULT,
+
             KmpTarget.NonJvm.Native.Mingw.X64.DEFAULT,
         ),
         commonMainSourceSet = {
             dependencies {
-//                api(project(":request-concept"))
-
-                // use published version for c-interop compatibility when
-                // publishing future minor versions of `-feature` only
-                api(deps.components.request.concept)
-                implementation(deps.kotlin.coroutines.core)
+                api(project(":request-concept"))
+                implementation(deps.kotlin.coroutines.core.core)
             }
         },
         commonTestSourceSet = {
             dependencies {
-                implementation(kotlin("test-common"))
-                implementation(kotlin("test-annotations-common"))
+                implementation(kotlin("test"))
             }
         },
     )
@@ -79,8 +80,5 @@ kmpConfiguration {
 kmpPublish {
     setupModule(
         pomDescription = "Kotlin Components' Request Feature",
-        versionNameOverride = "2.1.0-SNAPSHOT",
-        versionCodeOverride = 210000,
-        holdPublication = false,
     )
 }

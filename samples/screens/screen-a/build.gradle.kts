@@ -36,6 +36,5 @@ kmpConfiguration {
                 api(project(":extensions:request-extension-navigation"))
             }
         },
-        commonTestSourceSet = null
     )
 }
