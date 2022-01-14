@@ -29,15 +29,7 @@ kmpConfiguration {
     setupMultiplatform(
         setOf(
 
-            KmpTarget.Jvm.Jvm(
-                kotlinJvmTarget = JavaVersion.VERSION_1_8,
-                testSourceSet = {
-                    dependencies {
-                        implementation(depsTest.kotlin.coroutines)
-                        implementation(kotlin("test-junit"))
-                    }
-                }
-            ),
+            KmpTarget.Jvm.Jvm(kotlinJvmTarget = JavaVersion.VERSION_1_8),
 
             KmpTarget.Jvm.Android(
                 buildTools = versions.android.buildTools,
@@ -91,6 +83,7 @@ kmpConfiguration {
         commonTestSourceSet = {
             dependencies {
                 implementation(kotlin("test"))
+                implementation(depsTest.kotlin.coroutines)
             }
         },
     )
