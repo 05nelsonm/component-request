@@ -54,9 +54,12 @@ dependencies {
 
 ### Kotlin Version Compatibility
 
+**Note:** as of `3.0.0`, the experimental memory model for KotlinNative is enabled.
+
 |    request    |     kotlin     | kotlinx-coroutines |
 | :-----------: | :------------: | :----------------: |
 |     2.0.0     |     1.5.31     |       1.5.2        |
+|     3.0.0     |     1.6.10     |       1.6.0        |
 
 ### Git
 
