@@ -15,11 +15,24 @@
  **/
 package io.matthewnelson.component.request.feature.util
 
-expect value class RandomId private constructor(val value: String) {
+import kotlin.jvm.JvmInline
+import kotlin.random.Random
+
+@JvmInline
+value class RandomId private constructor(val value: String) {
 
     companion object {
-        operator fun invoke(size: Int): RandomId
-        operator fun invoke(): RandomId
-    }
+        private const val SIZE = 12
+        private val CHARS: List<Char> = ('a'..'z') + ('A'..'Z') + ('0'..'9')
 
+        operator fun invoke(size: Int = SIZE): RandomId =
+            CharArray(size).let { array ->
+
+                repeat(size) { index ->
+                    array[index] = CHARS[Random.nextInt(CHARS.size)]
+                }
+
+                RandomId(array.joinToString(""))
+            }
+    }
 }
