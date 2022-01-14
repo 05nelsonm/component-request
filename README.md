@@ -82,6 +82,12 @@ dependencies {
 }
 ```
 
+### Kotlin Version Compatibility
+
+|    request    |     kotlin     | kotlinx-coroutines |
+| :-----------: | :------------: | :----------------: |
+|     2.0.0     |     1.5.31     |       1.5.2        |
+
 ### Git
 
 This project utilizes git submodules. You will need to initialize them when 
