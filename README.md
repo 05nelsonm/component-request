@@ -6,87 +6,62 @@ where it is used for navigation.
 
 A full list of `kotlin-components` projects can be found [HERE](https://kotlin-components.matthewnelson.io)
 
-<!-- TODO: Link to concept/feature modularization gist (have to write first) -->
-Publications utilize concept/feature modularization such that `concept`s will only increment
-on major publication releases (ie. from `2` -> `3`) and `feature`s will increment on minor
-publication releases (ie. from `2.0.0` -> `2.1.0`), leaving modules relying on `concept`s 
-undisturbed.
-
 ### Get Started
 
 ```kotlin
 // build.gradle.kts
 dependencies {
-    val (concept, feature) = Pair("2", "2.0.0")
+    val requestVersion = "3.0.0"
 
-    // `request-feature` dependency will automatically import the `request-concept` dependency (CommonMain Target)
-    implementation("io.matthewnelson.kotlin-components:request-feature:$feature")
+    // `request-feature` will provide `request-concept`
+    implementation("io.matthewnelson.kotlin-components:request-feature:$requestVersion")
 
-    // If your project is modularized and/or you only need the abstractions (CommonMain Target)
-    implementation("io.matthewnelson.kotlin-components:request-concept:$concept")
+    // If your project is modularized and/or you only need the abstractions
+    implementation("io.matthewnelson.kotlin-components:request-concept:$requestVersion")
 
-    // navigation extension for the `request-concept` (CommonMain Target)
-    implementation("io.matthewnelson.kotlin-components:request-extension-navigation:$concept")
 
-    // androidx navigation implementation of the navigation extension (Android Target)
-    implementation("io.matthewnelson.kotlin-components:request-extension-navigation-androidx:$concept")
+    // EXTENSIONS - navigation
+
+    // navigation extension (provides `request-concept`)
+    implementation("io.matthewnelson.kotlin-components:request-extension-navigation:$requestVersion")
+
+    // alternatively, use the androidx navigation library extension (provides
+    // `request-extension-navigation`). (android target only)
+    implementation("io.matthewnelson.kotlin-components:request-extension-navigation-androidx:$requestVersion")
 }
 ```
 
 ```groovy
 // build.gradle
 dependencies {
-    def concept = "2"
-    def feature = "$concept.0.0"
-    
-    // `request-feature` dependency will automatically import the `request-concept` dependency (CommonMain Target)
-    implementation "io.matthewnelson.kotlin-components:request-feature:$feature"
+    def requestVersion = "3.0.0"
 
-    // If your project is modularized and/or you only need the abstractions (CommonMain Target)
-    implementation "io.matthewnelson.kotlin-components:request-concept:$concept"
+    // `request-feature` will provide `request-concept`
+    implementation "io.matthewnelson.kotlin-components:request-feature:$requestVersion"
 
-    // navigation extension for the `request-concept` (CommonMain Target)
-    implementation "io.matthewnelson.kotlin-components:request-extension-navigation:$concept"
-    
-    // androidx navigation implementation of the navigation extension (Android Target)
-    implementation "io.matthewnelson.kotlin-components:request-extension-navigation-androidx:$concept"
-}
-```
+    // If your project is modularized and/or you only need the abstractions
+    implementation "io.matthewnelson.kotlin-components:request-concept:$requestVersion"
 
-Example Monolithic (single module) Android Project (non-kotlin multiplatform)
-```kotlin
-// App module build.gradle.kts
-dependencies {
-    val (concept, feature) = Pair("2", "2.0.0")
-    implementation("io.matthewnelson.kotlin-components:request-feature:$feature")
-    implementation("io.matthewnelson.kotlin-components:request-extension-navigation-androidx:$concept")
-}
-```
 
-Example Modularized Android Project (non-kotlin multiplatform)
-```kotlin
-// Screen-A (Fragment) module build.gradle.kts
-dependencies {
-    val concept = "2"
-    // will automatically import `request-concept` and `request-extension-navigation` dependencies
-    // and then provide them to the above `App, or Activity` module
-    api("io.matthewnelson.kotlin-components:request-extension-navigation-androidx:$concept")
-}
+    // EXTENSIONS - navigation
 
-// App, or Activity module build.gradle.kts
-dependencies {
-    implementation(project(":screens:screen-a"))
+    // navigation extension (provides `request-concept`)
+    implementation "io.matthewnelson.kotlin-components:request-extension-navigation:$requestVersion"
 
-    val feature = "2.0.0"
-    implementation("io.matthewnelson.kotlin-components:request-feature:$feature")
+    // alternatively, use the androidx navigation library extension (provides
+    // `request-extension-navigation`). (android target only)
+    implementation "io.matthewnelson.kotlin-components:request-extension-navigation-androidx:$requestVersion"
 }
 ```
 
 ### Kotlin Version Compatibility
 
+**Note:** as of `3.0.0`, the experimental memory model for Kotlin Native is enabled.
+
 |    request    |     kotlin     | kotlinx-coroutines |
 | :-----------: | :------------: | :----------------: |
 |     2.0.0     |     1.5.31     |       1.5.2        |
+|     3.0.0     |     1.6.10     |       1.6.0        |
 
 ### Git
 
