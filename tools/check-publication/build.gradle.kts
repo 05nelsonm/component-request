@@ -43,7 +43,7 @@ kmpConfiguration {
     setupMultiplatform(
         setOf(
 
-            KmpTarget.Jvm.Jvm.DEFAULT,
+            KmpTarget.Jvm.Jvm(kotlinJvmTarget = JavaVersion.VERSION_11),
 
             KmpTarget.Jvm.Android(
                 buildTools = versions.android.buildTools,
