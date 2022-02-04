@@ -56,7 +56,7 @@ open class CachedRequestDriver<T: Any>(
     private val executedRequestsLock = Mutex()
     private val executedRequests: MutableList<RandomId> = ArrayList(replayCacheSize)
 
-    open suspend fun whenTrueExecuteRequest(instance: T, request: Request<T>): Boolean { return true }
+    protected open suspend fun whenTrueExecuteRequest(instance: T, request: Request<T>): Boolean = true
 
     /**
      * Returns true if the request was executed, and false if it was not
