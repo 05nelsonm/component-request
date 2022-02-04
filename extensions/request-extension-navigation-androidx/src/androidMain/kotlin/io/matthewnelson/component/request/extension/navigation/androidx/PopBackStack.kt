@@ -19,17 +19,66 @@ import androidx.annotation.IdRes
 import androidx.navigation.NavController
 import io.matthewnelson.component.request.extension.navigation.NavigateBack
 
+/**
+ * Specify either a [destinationId] to pop up to and whether it should be
+ * [inclusive] or not, or simply pop the backstack if able.
+ *
+ * [ensureSingleExecution] is an additional parameter that aids in the
+ * submission of requests from a ViewModel, where if set to `true`, a
+ * [PopBackStack] request can be instantiated as a global variable and
+ * multiple submissions had with the result of only popping the back stack
+ * once.
+ *
+ * Example:
+ *
+ * class WorkViewModel(private val navigator: WorkNavigator): ViewModel() {
+ *
+ *     private val popBackStackRequest = PopBackStack(ensureSingleExecution = true)
+ *
+ *     fun doWork() {
+ *         viewModelScope.launch {
+ *             // ... work
+ *             navigator.navigateBack(popBackStackRequest)
+ *         }
+ *     }
+ *
+ *     fun doMoreWork() {
+ *         viewModelScope.launch {
+ *             // ... more work
+ *             navigator.navigateBack(popBackStackRequest)
+ *         }
+ *     }
+ *
+ *     override fun onForeground() {
+ *         if (myCondition == ThisCondition) {
+ *             viewModelScope.launch {
+ *                 navigator.navigateBack(popBackStackRequest)
+ *             }
+ *         }
+ *     }
+ * }
+ * */
 open class PopBackStack(
     @IdRes
     val destinationId: Int? = null,
     val inclusive: Boolean = false,
+    val ensureSingleExecution: Boolean = false
 ): NavigateBack<NavController>() {
 
+    var hasBeenExecuted: Boolean = false
+        protected set
+
     override fun execute(value: NavController) {
+        if (ensureSingleExecution && hasBeenExecuted) return
+
         if (destinationId != null) {
-            value.popBackStack(destinationId, inclusive)
+            if (value.popBackStack(destinationId, inclusive)) {
+                hasBeenExecuted = true
+            }
         } else if (value.previousBackStackEntry != null) {
-            value.popBackStack()
+            if (value.popBackStack()) {
+                hasBeenExecuted = true
+            }
         }
     }
 
