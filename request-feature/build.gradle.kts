@@ -29,15 +29,12 @@ kmpConfiguration {
     setupMultiplatform(
         setOf(
 
-            KmpTarget.Jvm.Jvm(kotlinJvmTarget = JavaVersion.VERSION_11),
+            KmpTarget.Jvm.Jvm.DEFAULT,
 
             KmpTarget.Jvm.Android(
                 buildTools = versions.android.buildTools,
                 compileSdk = versions.android.sdkCompile,
                 minSdk = versions.android.sdkMin16,
-                kotlinJvmTarget = JavaVersion.VERSION_11,
-                compileSourceOption = JavaVersion.VERSION_11,
-                compileTargetOption = JavaVersion.VERSION_11,
                 target = {
                     publishLibraryVariants("release")
                 },
