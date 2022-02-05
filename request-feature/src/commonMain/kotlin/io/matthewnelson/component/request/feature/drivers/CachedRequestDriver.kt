@@ -21,7 +21,6 @@ import io.matthewnelson.component.request.concept.Request
 import kotlinx.coroutines.currentCoroutineContext
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.isActive
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
@@ -29,14 +28,14 @@ import kotlinx.coroutines.sync.withLock
 /**
  * Caches submitted requests such that upon collection, all requests (up to the [replayCacheSize]
  * specified) are replayed. Already executed requests are tracked by their [RandomId], such that
- * [CachedRequestDriver.executeRequest] will return `false` if it has already been executed; this is
- * necessary for platforms such as Android, where configuration changes could interrupt submission
- * and/or collection.
+ * [CachedRequestDriver.executeRequest] will return `false` if it has already been executed; this
+ * is necessary for platforms such as Android, where configuration changes could interrupt
+ * submission and/or collection.
  *
- * As a cache is being utilized, be mindful of context/callbacks whereby passing of it in the [Request]'s
- * constructor could cause a leak.
+ * As a cache is being utilized, be mindful of context/callbacks whereby passing of it in
+ * the [Request]'s constructor could cause a leak.
  *
- * Filter requests via the [whenTrueExecuteRequest] callback upon instantiation of [CachedRequestDriver].
+ * Filter requests via [whenTrueExecuteRequest].
  *
  * [replayCacheSize] must be > 0
  * */
@@ -56,7 +55,7 @@ open class CachedRequestDriver<T: Any>(
     private val executedRequestsLock = Mutex()
     private val executedRequests: MutableList<RandomId> = ArrayList(replayCacheSize)
 
-    open suspend fun whenTrueExecuteRequest(instance: T, request: Request<T>): Boolean { return true }
+    protected open suspend fun whenTrueExecuteRequest(instance: T, request: Request<T>): Boolean = true
 
     /**
      * Returns true if the request was executed, and false if it was not

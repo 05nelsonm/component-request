@@ -27,7 +27,7 @@ import kotlinx.coroutines.Dispatchers
  * A collector for Android that hooks into the lifecycle owner to start
  * and stop collection with LCE's as defined by [eventsToObserve] argument.
  * */
-class AndroidRequestCollector<T: Any>(
+class AndroidRequestCollector<T: Any> @JvmOverloads constructor(
     driverProvider: () -> RequestDriver<T>,
     instanceProvider: () -> T,
     onPostRequestExecution: (suspend (Request<T>) -> Unit)? = null,
@@ -97,6 +97,7 @@ class AndroidRequestCollector<T: Any>(
         owner.lifecycle.addObserver(collectionObserver)
     }
 
+    @JvmOverloads
     fun removeObserver(owner: LifecycleOwner, stopCollecting: Boolean = true) {
         owner.lifecycle.removeObserver(collectionObserver)
         if (stopCollecting) {

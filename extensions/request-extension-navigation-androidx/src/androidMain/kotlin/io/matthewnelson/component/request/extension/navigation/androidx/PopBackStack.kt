@@ -58,7 +58,7 @@ import io.matthewnelson.component.request.extension.navigation.NavigateBack
  *     }
  * }
  * */
-open class PopBackStack(
+open class PopBackStack @JvmOverloads constructor(
     @IdRes
     val destinationId: Int? = null,
     val inclusive: Boolean = false,
