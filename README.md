@@ -26,7 +26,7 @@ A full list of `kotlin-components` projects can be found [HERE](https://kotlin-c
 ```kotlin
 // build.gradle.kts
 dependencies {
-    val requestVersion = "3.0.0"
+    val requestVersion = "3.0.1"
 
     // `request-feature` will provide `request-concept`
     implementation("io.matthewnelson.kotlin-components:request-feature:$requestVersion")
@@ -49,7 +49,7 @@ dependencies {
 ```groovy
 // build.gradle
 dependencies {
-    def requestVersion = "3.0.0"
+    def requestVersion = "3.0.1"
 
     // `request-feature` will provide `request-concept`
     implementation "io.matthewnelson.kotlin-components:request-feature:$requestVersion"
@@ -77,6 +77,7 @@ dependencies {
 | :-----------: | :------------: | :----------------: |
 |     2.0.0     |     1.5.31     |       1.5.2        |
 |     3.0.0     |     1.6.10     |       1.6.0        |
+|     3.0.1     |     1.6.10     |       1.6.0        |
 
 ### Git
 

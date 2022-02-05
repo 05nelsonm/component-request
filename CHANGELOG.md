@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## Version 3.0.1 (2022-02-05)
+ - Adds `ensureSingleExecution` argument to navigation-androidx extension's `PopBackStack` class
+ - Adds `JvmOverloads` annotations
+ - Bumps `androidx.navigation` from `2.3.5` -> `2.4.0`
+ - Codebase cleanup
+
 ## Version 3.0.0 (2022-01-14)
  - Bumps Dependencies
  - Enables Kotlin Native's new Memory Model
