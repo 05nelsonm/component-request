@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## Version 3.0.2 (2022-05-08)
+ - Updates Kotlin-Components
+     - Bumps `kotlin` from `1.6.10` -> `1.6.21`
+     - Bumps `coroutines` from `1.6.0` -> `1.6.1`
+     - Bumps `androidx.navigation` from `2.4.0` -> `2.4.2`
+
 ## Version 3.0.1 (2022-02-05)
  - Adds `ensureSingleExecution` argument to navigation-androidx extension's `PopBackStack` class
  - Adds `JvmOverloads` annotations
