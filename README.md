@@ -1,6 +1,6 @@
 # component-request
-[![Kotlin](https://img.shields.io/badge/kotlin-1.6.10-blue.svg?logo=kotlin)](http://kotlinlang.org)
-[![Kotlin Coroutines](https://img.shields.io/badge/coroutines-1.6.0-blue.svg?logo=kotlin)](https://github.com/Kotlin/kotlinx.coroutines)
+[![Kotlin](https://img.shields.io/badge/kotlin-1.6.21-blue.svg?logo=kotlin)](http://kotlinlang.org)
+[![Kotlin Coroutines](https://img.shields.io/badge/coroutines-1.6.1-blue.svg?logo=kotlin)](https://github.com/Kotlin/kotlinx.coroutines)
 [![GitHub license](https://img.shields.io/badge/license-Apache%20License%202.0-blue.svg?style=flat)](https://www.apache.org/licenses/LICENSE-2.0)  
 
 ![android](https://camo.githubusercontent.com/b1d9ad56ab51c4ad1417e9a5ad2a8fe63bcc4755e584ec7defef83755c23f923/687474703a2f2f696d672e736869656c64732e696f2f62616467652f706c6174666f726d2d616e64726f69642d3645444238442e7376673f7374796c653d666c6174)
@@ -26,46 +26,46 @@ A full list of `kotlin-components` projects can be found [HERE](https://kotlin-c
 ```kotlin
 // build.gradle.kts
 dependencies {
-    val requestVersion = "3.0.1"
+    val vRequest = "3.0.2"
 
     // `request-feature` will provide `request-concept`
-    implementation("io.matthewnelson.kotlin-components:request-feature:$requestVersion")
+    implementation("io.matthewnelson.kotlin-components:request-feature:$vRequest")
 
     // If your project is modularized and/or you only need the abstractions
-    implementation("io.matthewnelson.kotlin-components:request-concept:$requestVersion")
+    implementation("io.matthewnelson.kotlin-components:request-concept:$vRequest")
 
 
     // EXTENSIONS - navigation
 
     // navigation extension (provides `request-concept`)
-    implementation("io.matthewnelson.kotlin-components:request-extension-navigation:$requestVersion")
+    implementation("io.matthewnelson.kotlin-components:request-extension-navigation:$vRequest")
 
     // alternatively, use the androidx navigation library extension (provides
     // `request-extension-navigation`). (android target only)
-    implementation("io.matthewnelson.kotlin-components:request-extension-navigation-androidx:$requestVersion")
+    implementation("io.matthewnelson.kotlin-components:request-extension-navigation-androidx:$vRequest")
 }
 ```
 
 ```groovy
 // build.gradle
 dependencies {
-    def requestVersion = "3.0.1"
+    def vRequest = "3.0.2"
 
     // `request-feature` will provide `request-concept`
-    implementation "io.matthewnelson.kotlin-components:request-feature:$requestVersion"
+    implementation "io.matthewnelson.kotlin-components:request-feature:$vRequest"
 
     // If your project is modularized and/or you only need the abstractions
-    implementation "io.matthewnelson.kotlin-components:request-concept:$requestVersion"
+    implementation "io.matthewnelson.kotlin-components:request-concept:$vRequest"
 
 
     // EXTENSIONS - navigation
 
     // navigation extension (provides `request-concept`)
-    implementation "io.matthewnelson.kotlin-components:request-extension-navigation:$requestVersion"
+    implementation "io.matthewnelson.kotlin-components:request-extension-navigation:$vRequest"
 
     // alternatively, use the androidx navigation library extension (provides
     // `request-extension-navigation`). (android target only)
-    implementation "io.matthewnelson.kotlin-components:request-extension-navigation-androidx:$requestVersion"
+    implementation "io.matthewnelson.kotlin-components:request-extension-navigation-androidx:$vRequest"
 }
 ```
 
@@ -78,6 +78,7 @@ dependencies {
 |     2.0.0     |     1.5.31     |       1.5.2        |
 |     3.0.0     |     1.6.10     |       1.6.0        |
 |     3.0.1     |     1.6.10     |       1.6.0        |
+|     3.0.2     |     1.6.21     |       1.6.1        |
 
 ### Git
 
