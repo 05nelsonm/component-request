@@ -15,7 +15,10 @@
  **/
 import io.matthewnelson.kotlin.components.dependencies.versions
 import io.matthewnelson.kotlin.components.kmp.KmpTarget
+import io.matthewnelson.kotlin.components.kmp.publish.isSnapshotVersion
 import io.matthewnelson.kotlin.components.kmp.publish.kmpPublishRootProjectConfiguration
+import io.matthewnelson.kotlin.components.kmp.util.includeSnapshotsRepoIfTrue
+import io.matthewnelson.kotlin.components.kmp.util.includeStagingRepoIfTrue
 import org.jetbrains.kotlin.gradle.plugin.KotlinJsCompilerType
 
 plugins {
@@ -24,20 +27,10 @@ plugins {
     id("kmp-publish")
 }
 
-kmpPublishRootProjectConfiguration?.let { config ->
-    repositories {
-        if (config.versionName.endsWith("-SNAPSHOT")) {
-            maven("https://oss.sonatype.org/content/repositories/snapshots/")
-        } else {
-            maven("https://oss.sonatype.org/content/groups/staging") {
-                credentials {
-                    username = rootProject.ext.get("mavenCentralUsername").toString()
-                    password = rootProject.ext.get("mavenCentralPassword").toString()
-                }
-            }
-        }
-    }
-}
+val pConfig = kmpPublishRootProjectConfiguration!!
+
+includeSnapshotsRepoIfTrue(pConfig.isSnapshotVersion)
+includeStagingRepoIfTrue(!pConfig.isSnapshotVersion)
 
 kmpConfiguration {
     setupMultiplatform(
@@ -51,44 +44,48 @@ kmpConfiguration {
                 minSdk = versions.android.sdkMin16,
                 mainSourceSet = {
                     dependencies {
-                        project.kmpPublishRootProjectConfiguration?.let { config ->
-                            dependencies {
-                                implementation("${config.group}:request-extension-navigation-androidx:${config.versionName}")
-                            }
-                        }
+                        implementation("${pConfig.group}:request-extension-navigation-androidx:${pConfig.versionName}")
                     }
                 }
             ),
 
             KmpTarget.NonJvm.JS(
                 compilerType = KotlinJsCompilerType.BOTH,
-                browser = KmpTarget.NonJvm.JS.Browser(
-                    jsBrowserDsl = null
-                ),
-                node = KmpTarget.NonJvm.JS.Node(
-                    jsNodeDsl = null
-                ),
-                mainSourceSet = null,
-                testSourceSet = null,
+                browser = KmpTarget.NonJvm.JS.Browser(),
+                node = KmpTarget.NonJvm.JS.Node(),
             ),
 
-            KmpTarget.NonJvm.Native.Unix.Darwin.Ios.All.DEFAULT,
+            KmpTarget.NonJvm.Native.Unix.Darwin.Ios.Arm32.DEFAULT,
+            KmpTarget.NonJvm.Native.Unix.Darwin.Ios.Arm64.DEFAULT,
+            KmpTarget.NonJvm.Native.Unix.Darwin.Ios.X64.DEFAULT,
+            KmpTarget.NonJvm.Native.Unix.Darwin.Ios.SimulatorArm64.DEFAULT,
+
             KmpTarget.NonJvm.Native.Unix.Darwin.Macos.X64.DEFAULT,
             KmpTarget.NonJvm.Native.Unix.Darwin.Macos.Arm64.DEFAULT,
-            KmpTarget.NonJvm.Native.Unix.Darwin.Tvos.All.DEFAULT,
-            KmpTarget.NonJvm.Native.Unix.Darwin.Watchos.All.DEFAULT,
 
+            KmpTarget.NonJvm.Native.Unix.Darwin.Tvos.Arm64.DEFAULT,
+            KmpTarget.NonJvm.Native.Unix.Darwin.Tvos.X64.DEFAULT,
+            KmpTarget.NonJvm.Native.Unix.Darwin.Tvos.SimulatorArm64.DEFAULT,
+
+            KmpTarget.NonJvm.Native.Unix.Darwin.Watchos.Arm32.DEFAULT,
+            KmpTarget.NonJvm.Native.Unix.Darwin.Watchos.Arm64.DEFAULT,
+            KmpTarget.NonJvm.Native.Unix.Darwin.Watchos.X64.DEFAULT,
+            KmpTarget.NonJvm.Native.Unix.Darwin.Watchos.X86.DEFAULT,
+            KmpTarget.NonJvm.Native.Unix.Darwin.Watchos.SimulatorArm64.DEFAULT,
+
+//            KmpTarget.NonJvm.Native.Unix.Linux.Arm32Hfp.DEFAULT,
+//            KmpTarget.NonJvm.Native.Unix.Linux.Mips32.DEFAULT,
+//            KmpTarget.NonJvm.Native.Unix.Linux.Mipsel32.DEFAULT,
             KmpTarget.NonJvm.Native.Unix.Linux.X64.DEFAULT,
 
             KmpTarget.NonJvm.Native.Mingw.X64.DEFAULT,
+//            KmpTarget.NonJvm.Native.Mingw.X86.DEFAULT,
         ),
         commonMainSourceSet = {
-            project.kmpPublishRootProjectConfiguration?.let { config ->
-                dependencies {
-                    implementation("${config.group}:request-concept:${config.versionName}")
-                    implementation("${config.group}:request-feature:${config.versionName}")
-                    implementation("${config.group}:request-extension-navigation:${config.versionName}")
-                }
+            dependencies {
+                implementation("${pConfig.group}:request-concept:${pConfig.versionName}")
+                implementation("${pConfig.group}:request-feature:${pConfig.versionName}")
+                implementation("${pConfig.group}:request-extension-navigation:${pConfig.versionName}")
             }
         }
     )
