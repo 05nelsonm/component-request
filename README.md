@@ -5,6 +5,7 @@
 
 ![android](https://camo.githubusercontent.com/b1d9ad56ab51c4ad1417e9a5ad2a8fe63bcc4755e584ec7defef83755c23f923/687474703a2f2f696d672e736869656c64732e696f2f62616467652f706c6174666f726d2d616e64726f69642d3645444238442e7376673f7374796c653d666c6174)
 ![ios](https://camo.githubusercontent.com/1fec6f0d044c5e1d73656bfceed9a78fd4121b17e82a2705d2a47f6fd1f0e3e5/687474703a2f2f696d672e736869656c64732e696f2f62616467652f706c6174666f726d2d696f732d4344434443442e7376673f7374796c653d666c6174)
+![apple-silicon](https://camo.githubusercontent.com/a92c841ffd377756a144d5723ff04ecec886953d40ac03baa738590514714921/687474703a2f2f696d672e736869656c64732e696f2f62616467652f737570706f72742d2535424170706c6553696c69636f6e2535442d3433424246462e7376673f7374796c653d666c6174)
 ![jvm](https://camo.githubusercontent.com/700f5dcd442fd835875568c038ae5cd53518c80ae5a0cf12c7c5cf4743b5225b/687474703a2f2f696d672e736869656c64732e696f2f62616467652f706c6174666f726d2d6a766d2d4442343133442e7376673f7374796c653d666c6174)
 ![js](https://camo.githubusercontent.com/3e0a143e39915184b54b60a2ecedec75e801f396d34b5b366c94ec3604f7e6bd/687474703a2f2f696d672e736869656c64732e696f2f62616467652f706c6174666f726d2d6a732d4638444235442e7376673f7374796c653d666c6174)
 ![node-js](https://camo.githubusercontent.com/d08fda729ceebcae0f23c83499ca8f06105350f037661ac9a4cc7f58edfdbca9/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f706c6174666f726d2d6e6f64656a732d3638613036332e7376673f7374796c653d666c6174)
@@ -26,7 +27,7 @@ A full list of `kotlin-components` projects can be found [HERE](https://kotlin-c
 ```kotlin
 // build.gradle.kts
 dependencies {
-    val vRequest = "3.0.2"
+    val vRequest = "3.0.3"
 
     // `request-feature` will provide `request-concept`
     implementation("io.matthewnelson.kotlin-components:request-feature:$vRequest")
@@ -49,7 +50,7 @@ dependencies {
 ```groovy
 // build.gradle
 dependencies {
-    def vRequest = "3.0.2"
+    def vRequest = "3.0.3"
 
     // `request-feature` will provide `request-concept`
     implementation "io.matthewnelson.kotlin-components:request-feature:$vRequest"
@@ -79,6 +80,7 @@ dependencies {
 |     3.0.0     |     1.6.10     |       1.6.0        |
 |     3.0.1     |     1.6.10     |       1.6.0        |
 |     3.0.2     |     1.6.21     |       1.6.1        |
+|     3.0.3     |     1.6.21     |       1.6.1        |
 
 ### Git
 
