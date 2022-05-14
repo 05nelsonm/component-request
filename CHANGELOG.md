@@ -1,5 +1,14 @@
 # CHANGELOG
 
+## Version 3.0.3 (2022-05-14)
+ - Updates Kotlin-Components
+     - Support new targets:
+         - `iosArm32`
+         - `iosSimulatorArm64`
+         - `tvosSimulatorArm64`
+         - `watchosx86`
+         - `watchosSimulatorArm64`
+
 ## Version 3.0.2 (2022-05-08)
  - Updates Kotlin-Components
      - Bumps `kotlin` from `1.6.10` -> `1.6.21`
