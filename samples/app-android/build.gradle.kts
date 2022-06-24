@@ -18,10 +18,10 @@ import io.matthewnelson.kotlin.components.dependencies.depsKapt
 import io.matthewnelson.kotlin.components.dependencies.versions
 
 plugins {
-    id("com.android.application")
-    id("kotlin-android")
-    id("kotlin-kapt")
-    id("dagger.hilt.android.plugin")
+    id(pluginId.android.application)
+    id(pluginId.kotlin.android)
+    id(pluginId.kotlin.kapt)
+    id(pluginId.google.hilt)
 }
 
 android {
