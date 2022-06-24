@@ -22,9 +22,8 @@ import io.matthewnelson.kotlin.components.kmp.util.includeStagingRepoIfTrue
 import org.jetbrains.kotlin.gradle.plugin.KotlinJsCompilerType
 
 plugins {
-    id("dependencies")
-    id("kmp-configuration")
-    id("kmp-publish")
+    id(pluginId.kmp.configuration)
+    id(pluginId.kmp.publish)
 }
 
 val pConfig = kmpPublishRootProjectConfiguration!!
