@@ -27,7 +27,7 @@ A full list of `kotlin-components` projects can be found [HERE](https://kotlin-c
 ```kotlin
 // build.gradle.kts
 dependencies {
-    val vRequest = "3.0.3"
+    val vRequest = "3.0.4"
 
     // `request-feature` will provide `request-concept`
     implementation("io.matthewnelson.kotlin-components:request-feature:$vRequest")
@@ -50,7 +50,7 @@ dependencies {
 ```groovy
 // build.gradle
 dependencies {
-    def vRequest = "3.0.3"
+    def vRequest = "3.0.4"
 
     // `request-feature` will provide `request-concept`
     implementation "io.matthewnelson.kotlin-components:request-feature:$vRequest"
@@ -76,11 +76,12 @@ dependencies {
 
 |    request    |     kotlin     | kotlinx-coroutines |
 | :-----------: | :------------: | :----------------: |
-|     2.0.0     |     1.5.31     |       1.5.2        |
-|     3.0.0     |     1.6.10     |       1.6.0        |
-|     3.0.1     |     1.6.10     |       1.6.0        |
-|     3.0.2     |     1.6.21     |       1.6.1        |
+|     3.0.4     |     1.6.21     |       1.6.3        |
 |     3.0.3     |     1.6.21     |       1.6.1        |
+|     3.0.2     |     1.6.21     |       1.6.1        |
+|     3.0.1     |     1.6.10     |       1.6.0        |
+|     3.0.0     |     1.6.10     |       1.6.0        |
+|     2.0.0     |     1.5.31     |       1.5.2        |
 
 ### Git
 

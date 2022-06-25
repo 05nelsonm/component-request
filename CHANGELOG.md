@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## Version 3.0.4 (2022-06-24)
+ - Bump `coroutines` from `1.6.1` -> `1.6.3`
+ - Re-enable compiler flag `enableCompatibilityMetadataVariant=true` to support
+   non-hierarchical projects. (sorry...)
+
 ## Version 3.0.3 (2022-05-14)
  - Updates Kotlin-Components
      - Support new targets:
