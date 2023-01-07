@@ -24,12 +24,13 @@ plugins {
 }
 
 kmpConfiguration {
-    setupMultiplatform(
+    setupMultiplatform(targets=
         setOf(
             KmpTarget.Jvm.Android(
                 buildTools = versions.android.buildTools,
                 compileSdk = versions.android.sdkCompile,
                 minSdk = versions.android.sdkMin16,
+                namespace = "io.matthewnelson.component.request.sample.activity.main",
                 pluginIds = setOf("kotlin-kapt", "dagger.hilt.android.plugin"),
                 androidConfig = {
                     buildFeatures.viewBinding = true

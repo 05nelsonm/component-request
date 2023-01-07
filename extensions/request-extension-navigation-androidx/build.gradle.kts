@@ -23,12 +23,13 @@ plugins {
 }
 
 kmpConfiguration {
-    setupMultiplatform(
+    setupMultiplatform(targets=
         setOf(
             KmpTarget.Jvm.Android(
                 buildTools = versions.android.buildTools,
                 compileSdk = versions.android.sdkCompile,
                 minSdk = versions.android.sdkMin16,
+                namespace = "io.matthewnelson.component.request.extension.navigation.androidx",
                 target = {
                     publishLibraryVariants("release")
                 },

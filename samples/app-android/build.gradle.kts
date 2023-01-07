@@ -27,6 +27,7 @@ plugins {
 android {
     compileSdk = versions.android.sdkCompile
     buildToolsVersion = versions.android.buildTools
+    namespace = "io.matthewnelson.app_android"
 
     packagingOptions {
         resources.excludes.add("META-INF/gradle/incremental.annotation.processors")
