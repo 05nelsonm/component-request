@@ -3,16 +3,15 @@ rootProject.name = "component-request"
 includeBuild("kotlin-components/includeBuild/dependencies")
 includeBuild("kotlin-components/includeBuild/kmp")
 
-// if ANDROID is not being built, don't include the app as it relies
-// on some android only kmp projects
 @Suppress("PrivatePropertyName")
 private val KMP_TARGETS: String? by settings
-
-private val allTargets = System.getProperty("KMP_TARGETS_ALL") != null
-private val targets = KMP_TARGETS?.split(',')
-
 @Suppress("PrivatePropertyName")
 private val CHECK_PUBLICATION: String? by settings
+@Suppress("PrivatePropertyName")
+private val KMP_TARGETS_ALL = System.getProperty("KMP_TARGETS_ALL") != null
+@Suppress("PrivatePropertyName")
+private val TARGETS = KMP_TARGETS?.split(',')
+
 if (CHECK_PUBLICATION != null) {
     include(":tools:check-publication")
 } else {
@@ -26,7 +25,7 @@ if (CHECK_PUBLICATION != null) {
     include(":samples:screens:screen-b")
     include(":samples:screens:screen-c")
 
-    if (allTargets || targets?.contains("ANDROID") != false) {
+    if (KMP_TARGETS_ALL || (TARGETS?.contains("ANDROID") != false && TARGETS?.contains("JVM") != false)) {
         include(":samples:app-android")
     }
 }
