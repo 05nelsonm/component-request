@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## Version 3.0.6 (2023-01-09)
+ - Updates `kotlin-components` submodule
+     - Kotlin `1.7.20` -> `1.8.0`
+
 ## Version 3.0.5 (2023-01-07)
  - Updates `kotlin-components` submodule
      - Kotlin `1.6.21` -> `1.7.20`

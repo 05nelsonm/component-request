@@ -31,7 +31,7 @@ A full list of `kotlin-components` projects can be found [HERE](https://kotlin-c
 ```kotlin
 // build.gradle.kts
 dependencies {
-    val vRequest = "3.0.5"
+    val vRequest = "3.0.6"
 
     // `request-feature` will provide `request-concept`
     implementation("io.matthewnelson.kotlin-components:request-feature:$vRequest")
@@ -56,7 +56,7 @@ dependencies {
 ```groovy
 // build.gradle
 dependencies {
-    def vRequest = "3.0.5"
+    def vRequest = "3.0.6"
 
     // `request-feature` will provide `request-concept`
     implementation "io.matthewnelson.kotlin-components:request-feature:$vRequest"
@@ -84,6 +84,7 @@ dependencies {
 
 | request | kotlin | kotlinx-coroutines |
 |:-------:|:------:|:------------------:|
+|  3.0.6  | 1.8.0  |       1.6.4        |
 |  3.0.5  | 1.7.20 |       1.6.4        |
 |  3.0.4  | 1.6.21 |       1.6.3        |
 |  3.0.3  | 1.6.21 |       1.6.1        |
@@ -114,11 +115,11 @@ $ git pull --recurse-submodules
 ```
 
 <!-- TAG_VERSION -->
-[badge-latest-release]: https://img.shields.io/badge/latest--release-3.0.5-blue.svg?style=flat
+[badge-latest-release]: https://img.shields.io/badge/latest--release-3.0.6-blue.svg?style=flat
 [badge-license]: https://img.shields.io/badge/license-Apache%20License%202.0-blue.svg?style=flat
 
 <!-- TAG_DEPENDENCIES -->
-[badge-kotlin]: https://img.shields.io/badge/kotlin-1.7.20-blue.svg?logo=kotlin
+[badge-kotlin]: https://img.shields.io/badge/kotlin-1.8.0-blue.svg?logo=kotlin
 [badge-coroutines]: https://img.shields.io/badge/coroutines-1.6.4-blue.svg?logo=kotlin
 
 <!-- TAG_PLATFORMS -->
