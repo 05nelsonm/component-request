@@ -13,9 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
-import io.matthewnelson.kotlin.components.dependencies.deps
-import io.matthewnelson.kotlin.components.dependencies.depsKapt
-import io.matthewnelson.kotlin.components.dependencies.versions
 import io.matthewnelson.kotlin.components.kmp.KmpTarget
 import io.matthewnelson.kotlin.components.kmp.util.kapt
 
@@ -31,7 +28,7 @@ kmpConfiguration {
                 compileSdk = versions.android.sdkCompile,
                 minSdk = versions.android.sdkMin16,
                 namespace = "io.matthewnelson.component.request.sample.screen.b",
-                pluginIds = setOf("kotlin-kapt", "dagger.hilt.android.plugin", "androidx.navigation.safeargs"),
+                pluginIds = setOf(pluginId.kotlin.kapt, pluginId.google.hilt, pluginId.androidx.safeArgs),
                 androidConfig = {
                     buildFeatures.viewBinding = true
                 },

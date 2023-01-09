@@ -30,11 +30,11 @@ buildscript {
     }
 
     dependencies {
-        classpath(io.matthewnelson.kotlin.components.dependencies.plugins.android.gradle)
-        classpath(io.matthewnelson.kotlin.components.dependencies.plugins.androidx.navigation.safeArgs)
-        classpath(io.matthewnelson.kotlin.components.dependencies.plugins.google.hilt)
-        classpath(io.matthewnelson.kotlin.components.dependencies.plugins.kotlin.gradle)
-        classpath(io.matthewnelson.kotlin.components.dependencies.plugins.mavenPublish)
+        classpath(pluginDeps.android.gradle)
+        classpath(pluginDeps.androidx.navigation.safeArgs)
+        classpath(pluginDeps.google.hilt)
+        classpath(pluginDeps.kotlin.gradle)
+        classpath(pluginDeps.mavenPublish)
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle.kts files
